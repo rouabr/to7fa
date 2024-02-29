@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="613.0" prefWidth="822.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReservationBackFXML">
+   <children>
+      <TableView fx:id="tvReservations" layoutX="110.0" layoutY="94.0" onMouseClicked="#getDataReservation" prefHeight="317.0" prefWidth="606.0" style="-fx-background-color: transparent;" stylesheets="@style1.css">
+        <columns>
+          <TableColumn fx:id="colusername" prefWidth="132.79995727539062" text="Nom de l'utilisateur" />
+          <TableColumn fx:id="colnommusee" prefWidth="118.39997863769531" text="Nom du musee" />
+            <TableColumn fx:id="colticketsreserves" prefWidth="172.00006103515625" text="Nombre de tickets reservés" />
+            <TableColumn fx:id="coldatereservation" prefWidth="198.39990234375" text="La date de reservation" />
+        </columns>
+      </TableView>
+      <DatePicker fx:id="tfdatereservation" layoutX="233.0" layoutY="534.0" style="-fx-border-color: #d4c4b4;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></DatePicker>
+      <Spinner fx:id="tfticketsreserves" layoutX="233.0" layoutY="493.0" prefHeight="26.0" prefWidth="175.0" style="-fx-border-color: #d4c4b4;;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Spinner>
+      <Button fx:id="btnModifierReservation" layoutX="259.0" layoutY="573.0" mnemonicParsing="false" onAction="#modifierReservation" styleClass="use-payment" stylesheets="@style1.css" text="Modifier">
+         <font>
+            <Font name="Cambria" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="supprimerReservationbtn" layoutX="593.0" layoutY="424.0" mnemonicParsing="false" onAction="#supprimerReservation" styleClass="use-payment" stylesheets="@style1.css" text="Annuler Reservation">
+         <font>
+            <Font name="Cambria" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Label layoutX="40.0" layoutY="497.0" text="Le nombre de tickets reservés">
+         <font>
+            <Font name="Cambria" size="14.0" />
+         </font></Label>
+      <Label layoutX="40.0" layoutY="538.0" text="La date dereservation">
+         <font>
+            <Font name="Cambria" size="14.0" />
+         </font></Label>
+      <Label layoutX="40.0" layoutY="461.0" text="Nom du musée">
+         <font>
+            <Font name="Cambria" size="14.0" />
+         </font></Label>
+      <ChoiceBox fx:id="tfnommuseereservation" layoutX="233.0" layoutY="457.0" prefHeight="26.0" prefWidth="175.0" style="-fx-background-color: #d4c4b4;" styleClass="comboBox" stylesheets="@style1.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ChoiceBox>
+      <ImageView fitHeight="62.0" fitWidth="62.0" layoutX="19.0" layoutY="11.0">
+         <image>
+            <Image url="@to7fa-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="81.0" layoutY="33.0" prefHeight="29.0" prefWidth="283.0" text="Gestion des reservations">
+         <font>
+            <Font name="Constantia Bold" size="22.0" />
+         </font>
+      </Label>
+      <Separator layoutY="73.0" prefHeight="3.0" prefWidth="822.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Separator>
+   </children>
+</AnchorPane>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="root" prefHeight="452.0" prefWidth="750.0" style="-fx-background-color: beige;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterPersonneFXML">
+   <children>
+      <Button fx:id="btnajouter" layoutX="36.0" layoutY="396.0" mnemonicParsing="false" onAction="#ajouterMusee" prefHeight="28.0" prefWidth="71.0" styleClass="use-payment" stylesheets="@style1.css" text="Ajouter">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Cambria" size="14.0" />
+         </font></Button>
+      <VBox layoutX="14.0" layoutY="92.0" prefHeight="226.0" prefWidth="184.0" spacing="30.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom">
+               <font>
+                  <Font name="Cambria" size="16.0" />
+               </font></Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse">
+               <font>
+                  <Font name="Cambria" size="16.0" />
+               </font></Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ville">
+               <font>
+                  <Font name="Cambria" size="16.0" />
+               </font></Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de tickets" wrappingWidth="147.24688720703125">
+               <font>
+                  <Font name="Cambria" size="16.0" />
+               </font></Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
+               <font>
+                  <Font name="Cambria" size="16.0" />
+               </font></Text>
+            <Text layoutX="10.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image">
+               <font>
+                  <Font name="Cambria" size="16.0" />
+               </font></Text>
+         </children>
+      </VBox>
+      <VBox layoutX="146.0" layoutY="92.0" prefHeight="218.0" prefWidth="175.0" spacing="25.0">
+         <children>
+            <TextField fx:id="tfnom">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></TextField>
+            <TextField fx:id="tfadresse">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></TextField>
+            <ChoiceBox fx:id="tfville" prefHeight="26.0" prefWidth="175.0" styleClass="comboBox" stylesheets="@style1.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ChoiceBox>
+            <TextField fx:id="tftickets">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></TextField>
+            <TextField fx:id="tfdescription">
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor></TextField>
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </VBox>
+      <TableView fx:id="tvmusee" layoutX="331.0" layoutY="73.0" onMouseClicked="#getData" prefHeight="306.0" prefWidth="410.0" style="-fx-background-color: transparent; -fx-border-radius: 80px;" stylesheets="@style1.css">
+        <columns>
+          <TableColumn fx:id="colnom" prefWidth="61.5999755859375" text="Nom" />
+          <TableColumn fx:id="coladresse" prefWidth="77.60003662109375" text="Adresse" />
+            <TableColumn fx:id="colville" prefWidth="64.0" text="Ville" />
+            <TableColumn fx:id="coltickets" prefWidth="88.79998779296875" text="Nbr Tickets" />
+            <TableColumn fx:id="coldescription" prefWidth="106.39996337890625" text="Description" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnsupprimer" layoutX="645.0" layoutY="384.0" mnemonicParsing="false" onAction="#supprimerMusee" styleClass="use-payment" stylesheets="@style1.css" text="Supprimer">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Cambria" size="14.0" />
+         </font></Button>
+      <Button fx:id="btnmodfier" layoutX="128.0" layoutY="395.0" mnemonicParsing="false" onAction="#modifierMusee" prefHeight="28.0" prefWidth="71.0" styleClass="use-payment" stylesheets="@style1.css" text="Modifier">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Cambria" size="14.0" />
+         </font></Button>
+      <Button fx:id="selectImageButton" layoutX="137.0" layoutY="317.0" mnemonicParsing="false" onMouseClicked="#choisirImage" prefHeight="83.0" prefWidth="111.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="70.0" fitWidth="79.0">
+               <image>
+                  <Image url="@imageinsert-fotor-20240227222243.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Separator layoutY="63.0" prefHeight="3.0" prefWidth="750.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Separator>
+      <Label layoutX="71.0" layoutY="23.0" prefHeight="29.0" prefWidth="283.0" text="Gestion des musées">
+         <font>
+            <Font name="Constantia Bold" size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="62.0" fitWidth="62.0" layoutX="9.0" layoutY="1.0">
+         <image>
+            <Image url="@to7fa-removebg-preview.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

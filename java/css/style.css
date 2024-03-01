@@ -1,0 +1,84 @@
+.search-box{
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius: 100;
+}
+
+.use-payment{
+    -fx-background-color:#D4C4B4;
+    -fx-background-radius: 100;
+}
+.a-box-group{
+    box-sizing: border-box
+}
+
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.transparent2{
+    -fx-background-color: white;
+}
+
+.search-button{
+    -fx-background-color: #ba8f7c;
+    -fx-background-radius: 30;
+}
+
+.right-bar{
+    -fx-background-color: #742B1F;
+}
+.method{
+    -fx-background-color: white;
+}
+
+.shadow{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
+}
+
+.chosen-fruit-card{
+    -fx-background-color: white;
+    -fx-background-radius: 30;
+}
+
+.comboBox{
+    -fx-background-color: rgba(255,255,255,0.3);
+    -fx-background-radius: 30;
+}
+
+.front {
+    -fx-background-color: #F7DED0;
+}
+
+.add-btn{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+}
+.delete-btn{
+    -fx-background-color: #B47B84;
+    -fx-background-radius: 100;
+}
+.free-delivery-card{
+    -fx-background-color: #742B1F;
+    -fx-background-radius: 30;
+}
+
+.shopping-online-card{
+    -fx-background-color: #BAEAC3;
+    -fx-background-radius: 30;
+}
+.design2{
+    -fx-background-color: #FEECE2;
+    -fx-background-radius: 30;
+}
+
+.fruit-item{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30;
+}
+.fruit-item2{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30;
+    -fx-border-color: #878787;
+    -fx-border-width: 1px;
+    -fx-border-radius: 30;
+}

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.backCommande.back">
+   <children>
+      <BorderPane layoutX="187.0" layoutY="100.0" prefHeight="200.0" prefWidth="712.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="65.0" prefWidth="200.0" styleClass="sidebarItemBar" stylesheets="@../css/back.css" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane layoutX="119.0" layoutY="20.0" prefHeight="25.0" prefWidth="600.0" stylesheets="@../css/back.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <styleClass>
+                        <String fx:value="menuItem" />
+                        <String fx:value="sidebarItem" />
+                     </styleClass>
+                     <children>
+                        <ImageView fx:id="Exit" fitHeight="22.0" fitWidth="22.0" layoutX="870.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imgBack/exit.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <HBox layoutX="189.0" layoutY="15.0" prefHeight="40.0" prefWidth="522.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+                     <children>
+                        <JFXButton onAction="#Add" prefHeight="38.0" prefWidth="136.0" styleClass="menuItem" stylesheets="@../css/back.css" text="ADD" textFill="#b7b7b7">
+                           <font>
+                              <Font name="Cambria" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imgBack/add1.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton onAction="#Delete" prefHeight="38.0" prefWidth="136.0" styleClass="menuItem" stylesheets="@../css/back.css" text="DELETE" textFill="#b7b7b7">
+                           <font>
+                              <Font name="Cambria" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imgBack/icons8-supprimer-la-base-de-données-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton onAction="#Update" prefHeight="38.0" prefWidth="136.0" styleClass="menuItem" stylesheets="@../css/back.css" text="UPDATE" textFill="#b7b7b7">
+                           <font>
+                              <Font name="Cambria" size="15.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imgBack/icons8-sauvegarde-des-données-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <Label fx:id="Menu" layoutX="33.0" layoutY="27.0" prefHeight="32.0" prefWidth="81.0" text="Menu" textFill="#b7b7b7">
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imgBack/menu1.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="MeniBack" layoutX="33.0" layoutY="27.0" onDragDetected="#home" prefHeight="32.0" prefWidth="81.0" text="Menu" textFill="#b7b7b7">
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imgBack/menu1.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Cambria Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXButton layoutX="242.0" layoutY="24.0" onAction="#Dashboard" prefHeight="38.0" prefWidth="136.0" styleClass="menuItem" stylesheets="@../css/back.css" text="Dashboard" textFill="#b7b7b7">
+                     <font>
+                        <Font name="Cambria" size="15.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imgBack/dash1.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets right="30.0" />
+                     </padding>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </top>
+         <left>
+            <AnchorPane fx:id="slider" prefHeight="362.0" prefWidth="176.0" styleClass="right-bar" stylesheets="@../css/back.css" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox layoutX="38.0" layoutY="32.0" prefHeight="200.0" prefWidth="100.0" stylesheets="@../css/back.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
+                     <children>
+                        <Line endX="62.585784912109375" startX="-100.0" stroke="#b7b7b7" strokeWidth="2.0" />
+                        <JFXButton alignment="BOTTOM_LEFT" onAction="#Dashboardpanier" prefHeight="38.0" prefWidth="176.0" styleClass="menuItem" stylesheets="@../css/back.css" text="Dashboard" textFill="#fffdfd">
+                           <font>
+                              <Font name="Cambria Bold" size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imgBack/dash.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton alignment="BOTTOM_LEFT" onAction="#AddPanier" prefHeight="38.0" prefWidth="176.0" styleClass="menuItem" stylesheets="@../css/back.css" text="ADD" textFill="#fffdfd">
+                           <font>
+                              <Font name="Cambria Bold" size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imgBack/add.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="48.0" onAction="#DeletePanier" prefHeight="38.0" prefWidth="176.0" styleClass="menuItem" stylesheets="@../css/back.css" text="DELETE" textFill="#fffdfd">
+                           <font>
+                              <Font name="Cambria Bold" size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imgBack/icons8-supprimer-la-corbeille-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="86.0" onAction="#UpdatePanier" prefHeight="38.0" prefWidth="176.0" styleClass="menuItem" stylesheets="@../css/back.css" text="UPDATE" textFill="#fffdfd">
+                           <font>
+                              <Font name="Cambria Bold" size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../imgBack/icons8-mises-à-jour-disponibles-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                     </children>
+                  </VBox>
+                  <Label layoutX="48.0" layoutY="14.0" prefHeight="30.0" prefWidth="80.0" text="Panier" textFill="#fffefe">
+                     <font>
+                        <Font name="Cambria" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </left>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <StackPane fx:id="stackpane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

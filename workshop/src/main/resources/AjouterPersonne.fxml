@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane onDragDetected="#AjouterPersonne" prefHeight="277.0" prefWidth="364.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterPersonne">
+   <children>
+      <Button layoutX="44.0" layoutY="201.0" mnemonicParsing="false" text="Afficher" />
+      <Button layoutX="148.0" layoutY="201.0" mnemonicParsing="false" text="Reset" />
+      <TextArea fx:id="tfprenom" layoutX="84.0" layoutY="61.0" prefHeight="0.0" prefWidth="152.0" />
+      <TextArea fx:id="tfnom" layoutX="84.0" layoutY="15.0" prefHeight="0.0" prefWidth="152.0" />
+      <Text layoutX="32.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" />
+      <Text layoutX="31.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="prenom" />
+      <Text layoutX="41.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age" />
+      <TextArea fx:id="tfage" layoutX="84.0" layoutY="107.0" prefHeight="2.0" prefWidth="152.0" />
+      <Button fx:id="tfsave" layoutX="236.0" layoutY="201.0" mnemonicParsing="false" onAction="#AjouterPersonne" text="Save" />
+   </children>
+</AnchorPane>

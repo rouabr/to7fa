@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="602.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserOeuvre">
+   <children>
+      <BorderPane layoutX="-1.0" prefHeight="602.0" prefWidth="893.0">
+         <top>
+            <HBox prefHeight="75.0" prefWidth="894.0" stylesheets="@style.css" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="80.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/loggoo.PNG" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="backo" mnemonicParsing="false" onAction="#backTopan" prefHeight="50.0" prefWidth="102.0" stylesheets="@style.css" text="Acceuil" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="20.0" top="10.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="Myprofile-button" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                  </Button>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <Pane prefHeight="78.0" prefWidth="290.0" />
+                  <Button id="whoarewe" fx:id="Whoarewe" mnemonicParsing="false" prefHeight="26.0" prefWidth="109.0" stylesheets="@style.css" text="who are we" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="20.0" top="20.0" />
+                     </HBox.margin>
+                     <styleClass>
+                        <String fx:value="Basket-button" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                     <font>
+                        <Font name="Gill Sans MT Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <HBox prefHeight="78.0" prefWidth="208.0" styleClass="rounded-corners" stylesheets="@style.css">
+                     <children>
+                        <Separator orientation="VERTICAL" prefHeight="200.0" />
+                        <Label contentDisplay="CENTER" prefHeight="62.0" prefWidth="154.0" styleClass="search-box" stylesheets="@style.css" text="   Jaber El Mahjoub" textFill="#7e4a11">
+                           <HBox.margin>
+                              <Insets left="5.0" top="5.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Gill Sans MT" size="15.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="63.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" styleClass="rounded-corners">
+                           <image>
+                              <Image url="@img/606240_1_s.jpg" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+            </HBox>
+         </top>
+         <left>
+            <VBox prefHeight="525.0" prefWidth="210.0" stylesheets="@style.css" BorderPane.alignment="CENTER">
+               <children>
+                  <Separator prefWidth="200.0" />
+                  <VBox prefHeight="180.0" prefWidth="211.0">
+                     <children>
+                        <Label contentDisplay="CENTER" prefHeight="41.0" prefWidth="214.0" stylesheets="@style.css" text="Browsing">
+                           <font>
+                              <Font name="Gill Sans MT" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="210.0" styleClass="mouse-moved" stylesheets="@style.css">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/etoile.png" />
+                                 </image>
+                              </ImageView>
+                              <Label contentDisplay="CENTER" prefHeight="42.0" prefWidth="124.0" stylesheets="@style.css" text="Best sellers">
+                                 <font>
+                                    <Font name="Gill Sans MT" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="210.0" styleClass="mouse-moved" stylesheets="@style.css">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/controle-de-liste.png" />
+                                 </image>
+                              </ImageView>
+                              <Label contentDisplay="CENTER" prefHeight="42.0" prefWidth="124.0" stylesheets="@style.css" text="Browse">
+                                 <font>
+                                    <Font name="Gill Sans MT" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="210.0" styleClass="mouse-moved" stylesheets="@style.css">
+                           <children>
+                              <ImageView fitHeight="37.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/applications.png" />
+                                 </image>
+                              </ImageView>
+                              <Label contentDisplay="CENTER" prefHeight="42.0" prefWidth="124.0" stylesheets="@style.css" text="Categories">
+                                 <font>
+                                    <Font name="Gill Sans MT" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <Separator prefWidth="200.0" />
+                  <VBox prefHeight="189.0" prefWidth="210.0">
+                     <children>
+                        <Label contentDisplay="CENTER" prefHeight="42.0" prefWidth="124.0" stylesheets="@style.css" text="Your Artwork">
+                           <font>
+                              <Font name="Gill Sans MT" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="210.0" stylesheets="@style.css">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/controle-de-liste.png" />
+                                 </image>
+                              </ImageView>
+                              <Label contentDisplay="CENTER" prefHeight="42.0" prefWidth="124.0" stylesheets="@style.css" text="Art Work">
+                                 <font>
+                                    <Font name="Gill Sans MT" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <styleClass>
+                              <String fx:value="mouse-moved" />
+                              <String fx:value="selected" />
+                              <String fx:value="shadow" />
+                           </styleClass>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="210.0" styleClass="mouse-moved" stylesheets="@style.css">
+                           <children>
+                              <ImageView fitHeight="37.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/panier.png" />
+                                 </image>
+                              </ImageView>
+                              <Label contentDisplay="CENTER" prefHeight="42.0" prefWidth="124.0" stylesheets="@style.css" text="Basket">
+                                 <font>
+                                    <Font name="Gill Sans MT" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="67.0" prefWidth="204.0" />
+                     </children>
+                  </VBox>
+                  <Separator prefWidth="200.0" />
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="top-bar" stylesheets="@style.css" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="199.0" prefWidth="68.0" stylesheets="@style.css">
+                     <HBox.margin>
+                        <Insets bottom="300.0" left="20.0" right="10.0" top="20.0" />
+                     </HBox.margin>
+                     <children>
+                        <Button id="AjouterOeuvre" fx:id="AjouterOeuvre" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#Ajout" prefHeight="35.0" prefWidth="58.0" stylesheets="@style.css" text="+" textFill="WHITE">
+                           <font>
+                              <Font name="Gill Sans MT" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="5.0" top="70.0" />
+                           </VBox.margin>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="Product-Vbox" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                     <styleClass>
+                        <String fx:value="Product-Vbox" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                  </VBox>
+                  <ScrollPane prefHeight="527.0" prefWidth="584.0" styleClass="SCROLLPAN" stylesheets="@style.css">
+                     <content>
+                        <GridPane fx:id="grid" prefHeight="26.0" prefWidth="21.0">
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </HBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

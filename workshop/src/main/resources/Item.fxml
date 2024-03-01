@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="202.0" prefWidth="227.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Item">
+   <children>
+      <VBox layoutX="-2.0" prefHeight="268.0" prefWidth="234.0">
+         <children>
+            <ImageView fx:id="imageItem" fitHeight="149.0" fitWidth="234.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="idItem" prefHeight="18.0" prefWidth="46.0" text="id">
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Gill Sans MT" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="prixItem" text="prix">
+               <VBox.margin>
+                  <Insets left="190.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Gill Sans MT" size="18.0" />
+               </font>
+            </Label>
+            <Label text="Titre">
+               <font>
+                  <Font name="Gill Sans MT" size="19.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="statusItem" text="status">
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Gill Sans MT" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="dateItem" text="date">
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Gill Sans MT" size="19.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,133 @@
+.search-box{
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius: 100;
+}
+
+.use-payment{
+    -fx-background-color:#D4C4B4;
+    -fx-background-radius: 100;
+}
+.a-box-group{
+    box-sizing: border-box
+}
+
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.transparent2{
+    -fx-background-color: white;
+}
+
+.search-button{
+    -fx-background-color: #ba8f7c;
+    -fx-background-radius: 30;
+}
+
+.right-bar{
+    -fx-background-color: #742B1F;
+}
+.method{
+    -fx-background-color: white;
+}
+
+.shadow{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
+}
+
+.chosen-fruit-card{
+    -fx-background-color: white;
+    -fx-background-radius: 30;
+}
+
+.comboBox{
+    -fx-background-color: rgba(255,255,255,0.3);
+    -fx-background-radius: 30;
+}
+
+.front {
+    -fx-background-color: #F7DED0;
+}
+
+.add-btn{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+}
+.delete-btn{
+    -fx-background-color: #D4C4B4;
+    -fx-background-radius: 100;
+}
+.free-delivery-card{
+    -fx-background-color: #742B1F;
+    -fx-background-radius: 30;
+}
+
+.shopping-online-card{
+    -fx-background-color: #BAEAC3;
+    -fx-background-radius: 30;
+}
+.les-button{
+    -fx-background-color: #742b1f;
+    -fx-background-radius: 30;
+}
+.search-boxyossra{
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius: 100;
+}
+
+.transparentyossra{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+
+
+ .SCROLLPANyossra{
+      -fx-background:#e2c09e;
+
+  }.scroll-baryossra{
+       -fx-background-color: #e8b8b0;
+
+   }
+
+
+.shadowyossra{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
+}
+
+.top-baryossra{
+    -fx-background-color: #e2c09e;
+}
+.img.rounded-cornersyossra {
+    border-radius: 30px;
+}
+.selectedyossra{
+    -fx-background-color: #766f64;
+}
+
+.Product-Vboxyossra{
+    -fx-background-color: #bb8e6d;
+    -fx-background-radius: 30;
+    border-radius: 30px;
+}
+
+.table-column-cellyossra{
+    -fx-background-color: rgb(161, 111, 97);
+    -fx-border-color:rgb(159,159,159);
+}
+
+.design2{
+    -fx-background-color: #FEECE2;
+    -fx-background-radius: 30;
+}
+
+.fruit-item{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30;
+}
+.fruit-item2{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30;
+    -fx-border-color: #878787;
+    -fx-border-width: 1px;
+    -fx-border-radius: 30;
+}

@@ -1,38 +1,96 @@
-/*
- * Empty Stylesheet file.
- */
+.search-box{
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius: 100;
+}
 
-.mainFxmlClass {
+.use-payment{
+    -fx-background-color:#CAA6A6;
+    -fx-background-radius: 100;
+}
+.a-box-group{
+    box-sizing: border-box
+}
 
-}
-.white-background{
-    -fx-background-color: #fff;
-}
-.rounded-botton-background{
-    -fx-background-color: #e8d9d3;
-    -fx-background-radius: 0 0 50 50;
-}
-.transparent-background{
+.transparent{
     -fx-background-color: rgba(0,0,0,0);
 }
-.rounded-top-background{
-    -fx-background-color: #e8d9d3;
-    -fx-background-radius: 50 50 0 0;
-}
-.button{
-    -fx-background-color:  #8c4424;
-    -fx-background-radius: 0 0 0 0;
-}
-.buttonAjoute{
-    -fx-background-color: #e8d9d3;
-    -fx-background-radius: 0 0 0 0;
+
+.transparent2{
+    -fx-background-color: white;
 }
 
-.Label{
-    -fx-background-color:  #8c4424;
-    -fx-background-radius: 20 0 20 0;
+.search-button{
+    -fx-background-color: #ba8f7c;
+    -fx-background-radius: 30;
 }
-.bottonnAjouter{
-    -fx-background-color: #e8d9d3;
-    -fx-background-radius: 20 0 20 0;
+
+.right-bar{
+    -fx-background-color: #944E63;
+}
+.method{
+    -fx-background-color: white;
+}
+
+.shadow{
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
+}
+
+.chosen-fruit-card{
+    -fx-background-color: white;
+    -fx-background-radius: 30;
+}
+
+.comboBox{
+    -fx-background-color: rgba(255,255,255,0.3);
+    -fx-background-radius: 30;
+}
+
+.front {
+    -fx-background-color: #F7DED0;
+}
+
+.add-btn{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 100;
+}
+.delete-btn{
+    -fx-background-color: #B47B84;
+    -fx-background-radius: 100;
+}
+.free-delivery-card{
+    -fx-background-color: #944E63;
+    -fx-background-radius: 30;
+}
+
+.shopping-online-card{
+    -fx-background-color: #B47B84;
+    -fx-background-radius: 30;
+}
+
+.design2{
+    -fx-background-color: #FFE7E7;
+    -fx-background-radius: 30;
+}
+
+.fruit-item{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30;
+}
+.fruit-item2{
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-width: 0 0 1 0; /* Top, right, bottom, left */
+    -fx-border-color: lightblue;
+}
+.choice-box .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.choice-box .arrow-button .arrow {
+    -fx-background-color: transparent;
+}
+
+.choice-box .box {
+    -fx-border-color: transparent transparent #ADD8E6 transparent; /* Light blue underline */
+    -fx-border-width: 0 0 1 0; /* Top, right, bottom, left */
 }

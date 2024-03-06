@@ -8,16 +8,9 @@ package to7fa.controllers;
 
 
 import to7fa.entities.evenement;
-import to7fa.services.ServiceEvenement;
 //import com.twilio.http.HttpClient;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -43,10 +36,21 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javax.imageio.ImageIO;
 
 import org.controlsfx.control.Notifications;
+import to7fa.services.ServiceEvenement;
 
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.event.ActionEvent;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 /**
  * FXML Controller class
@@ -100,11 +104,13 @@ public class AjoutEvenementController implements Initializable {
     @FXML
     private Button btn_importer;
 
-    String xamppFolderPath = "C:/xampp/htdocs/img/";
+    public String imagePath = "Image non sélectionnée";
     @FXML
     private ImageView imageevenement;
     @FXML
     private Button btn_retour;
+
+
 
     private String path;
     File selectedFile;
@@ -136,26 +142,27 @@ public class AjoutEvenementController implements Initializable {
     private void ajouterEvenement(ActionEvent event) {
 
 
-
         String nom_event = TF_nom.getText();
         String description_event = TF_description.getText();
         String lieu_event = TF_lieu.getText();
 
-       // String type_event = comboType.getValue();
+        // String type_event = comboTy   pe.getValue();
         LocalDate dateDebut_local = dateDebut.getValue();
         LocalDate dateFin_local = dateFin.getValue();
 
         Date dateDebut_event = java.sql.Date.valueOf(dateDebut_local);
         Date dateFin_event = java.sql.Date.valueOf(dateFin_local);
-        int capacite_event =  Integer.parseInt(TF_capacite.getText());
+        int capacite_event = Integer.parseInt(TF_capacite.getText());
 
-       String image_event = TF_image.getText();
+        String image_event = TF_image.getText();
         System.out.println(TF_image.getText());
         double prix_event = Double.parseDouble(TF_prix.getText());
 
 
-        evenement ev = new evenement (nom_event,description_event,lieu_event,typee.getText(),  dateDebut_event,  dateFin_event,  capacite_event, image_event,  prix_event);
+        evenement ev = new evenement(nom_event, description_event, lieu_event, typee.getText(), dateDebut_event, dateFin_event, capacite_event, image_event, prix_event);
         System.out.println("gg");
+
+
         //*****************
 
     /*HttpPost post = new HttpPost("http://localhost/img/upload.php");
@@ -207,6 +214,30 @@ public class AjoutEvenementController implements Initializable {
                 Logger.getLogger(AfficherEvenementsController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    @FXML
+    private Button btnPDF;
+
+    void genererPDF(ActionEvent event) {
+      /*  try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save PDF File");
+            fileChooser.setInitialFileName("liste_evenements.pdf");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+
+            File file = fileChooser.showSaveDialog(btnPDF.getScene().getWindow());
+
+            if (file != null) {
+                ObservableList<evenement> evenements = /* Get your list of events here ;
+                PDF.generatePDF(evenements, file);
+                System.out.println("PDF generated successfully.");
+            } else {
+                System.out.println("No file selected.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("An error occurred while generating PDF.");
+        }*/
+    }
 
 
 
@@ -387,35 +418,44 @@ public class AjoutEvenementController implements Initializable {
         return false;
     }
 
+
+    // Assuming xamppFolderPath is correctly initialized somewhere in your class
+    private String xamppFolderPath = "C:/xampp/htdocs/img/";
+
     @FXML
     private void importerImage(ActionEvent event) {
-
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Pick a banner file !");
-        Stage stage = new Stage();
+        fileChooser.setTitle("Pick a banner file!");
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("JPEG", "*.jpeg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png")
+                new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.jpeg", "*.png")
         );
-        File file = fileChooser.showOpenDialog(stage);
 
-        Path source = file.toPath();
-        String fileName = file.getName();
-        Path destination = Paths.get(xamppFolderPath + fileName);
+        File file = fileChooser.showOpenDialog(null); // Use the primary stage if available instead of null
+        if (file != null) {
+            try {
+                Path source = file.toPath();
+                String fileName = file.getName();
+                Path destination = Paths.get(xamppFolderPath + fileName);
 
+                // Copy the file to the destination directory
+                Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
 
-
-        try {
-            Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
-            BufferedImage bufferedImage = ImageIO.read(file);
-            TF_image.setText(fileName);
-        } catch (IOException ex) {
-            System.out.println("could not get the image");
+                // Update TextField with the file name
+                TF_image.setText(fileName);
+                System.out.println("Image imported successfully: " + fileName);
+            } catch (IOException e) {
+                System.err.println("Error importing the image: " + e.getMessage());
+                // Optionally, update the UI or show an alert dialog to inform the user of the error
+            }
+        } else {
+            System.out.println("Image import cancelled or failed.");
         }
-        String imagePath = "img/" + fileName;
     }
 
 }
+
+
+
+
 
 

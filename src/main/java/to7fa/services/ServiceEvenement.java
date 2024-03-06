@@ -174,7 +174,7 @@ public class ServiceEvenement {
 
             pst.setInt(1, ID_event);
             int nbSuppression = pst.executeUpdate();
-System.out.println("gg");
+            System.out.println("gg");
             if (nbSuppression == 0) {
                 System.out.println("Pas de suppression d'évènement effectuée");
             } else {

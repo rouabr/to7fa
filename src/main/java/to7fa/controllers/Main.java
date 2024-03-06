@@ -23,11 +23,11 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/evenementClient.fxml"));
-           // Parent root = FXMLLoader.load(getClass().getResource("/AfficherEvenements.fxml"));
+        // Parent root = FXMLLoader.load(getClass().getResource("/evenementClient.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/AfficherEvenements.fxml"));
             //Parent root = FXMLLoader.load(getClass().getResource("/codingbeasts/doulicha/views/AfficherParticipations.fxml"));
 
-            // Parent root = FXMLLoader.load(getClass().getResource("/to7fa/views/homeAdmin.fxml"));
+           // Parent root = FXMLLoader.load(getClass().getResource("/homeAdmin.fxml"));
             // Parent root = FXMLLoader.load(getClass().getResource("/org/to7fa/views/passEvent.fxml"));
 
 

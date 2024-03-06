@@ -31,19 +31,19 @@ public class ServiceParticipationEvenement {
 
         try {
             Statement st = cnx.createStatement();
-            String query = "SELECT * FROM `participation_evenement`";
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next()) {
-                participation_evenement part = new participation_evenement();
-
-                part.setID_participation(rs.getInt(1));
-                part.setID_user(rs.getInt(2));
-                part.setID_event(rs.getInt(3));
-                part.setNombre_participation(rs.getInt(4));
-                part.setNum_tel(rs.getString(5));
-                System.out.println(part);
-                participation_evenement.add(part);
-            }
+           //tring query = "SELECT * FROM `participation_evenement`";
+            String query= "SELECT p.*, u.user_name, e.nom_event FROM participation_evenement p JOIN user u ON p.id_user = u.user_id JOIN evenement e ON p.id_event = e.id_event";
+            ResultSet resultSet = st.executeQuery(query);
+            while (resultSet.next()) {
+                participation_evenement pe = new participation_evenement();
+                pe.setID_participation(resultSet.getInt("ID_participation"));
+                pe.setID_user(resultSet.getInt("ID_user"));
+                pe.setID_event(resultSet.getInt("ID_event"));
+                pe.setNombre_participation(resultSet.getInt("nombre_participation"));
+                pe.setNum_tel(resultSet.getString("num_tel"));
+                pe.setUsername(resultSet.getString("user_name")); // Set the username from the result set
+                // Add pe to your collection or use it as needed
+                participation_evenement.add(pe);            }
 
         } catch (SQLException ex) {
             System.out.println("erreur");
@@ -113,7 +113,7 @@ public class ServiceParticipationEvenement {
                 participation.setNombre_participation(rs.getInt(4));
                 participation.setNum_tel(rs.getString(5));
 
-
+                System.out.println("iamhers"+participation);
                 ListParticipation.add(participation);
             }
         } catch (SQLException ex){

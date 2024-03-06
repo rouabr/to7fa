@@ -13,7 +13,7 @@ public class participation_evenement {
     private int ID_event;
     private int nombre_participation;
     private String num_tel;
-
+    private String username; // Added field for username
 
     public participation_evenement() {
     }
@@ -24,6 +24,7 @@ public class participation_evenement {
         this.ID_event = ID_event;
         this.nombre_participation = nombre_participation;
         this.num_tel = num_tel;
+        this.username = username; // Initialize username in constructor
     }
 
     public participation_evenement(int ID_user, int ID_event, int nombre_participation, String num_tel) {
@@ -32,7 +33,14 @@ public class participation_evenement {
         this.nombre_participation = nombre_participation;
         this.num_tel = num_tel;
     }
+    // Getter and Setter for username
+    public String getUsername() {
+        return username;
+    }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
     public int getID_participation() {
         return ID_participation;
     }
@@ -76,7 +84,7 @@ public class participation_evenement {
 
     @Override
     public String toString() {
-        return "participation_evenement{" + "ID_participation=" + ID_participation + ", ID_user=" + ID_user + ", ID_event=" + ID_event + ", nombre_participation=" + nombre_participation + ", num_tel=" + num_tel + '}';
+        return "participation_evenement{" + "ID_participation=" + ID_participation + ", ID_user=" + ID_user + ", ID_event=" + ID_event + ", nombre_participation=" + nombre_participation + ", num_tel=" + num_tel +  ", username='" + username + '\'' +'}';
     }
 
 

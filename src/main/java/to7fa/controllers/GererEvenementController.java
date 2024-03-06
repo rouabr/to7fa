@@ -6,7 +6,7 @@
 package to7fa.controllers;
 
 import to7fa.entities.evenement;
-import to7fa.services.ServiceEvenement;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +44,7 @@ import javafx.util.Duration;
 import javax.imageio.ImageIO;
 
 import org.controlsfx.control.Notifications;
+import to7fa.services.ServiceEvenement;
 
 /**
  * FXML Controller class
@@ -150,7 +151,7 @@ public class GererEvenementController implements Initializable {
                 ev.setDescription_event(TF_descriptionM.getText());
                 ev.setLieu_event(TF_lieuM.getText());
                 ev.setCapacite_event(Integer.parseInt(TF_capaciteM.getText()));
-               // ev.setImage_event(TF_imageM.getText());
+                ev.setImage_event(TF_imageM.getText());
                 ev.setPrix_event(Double.parseDouble(TF_prixM.getText()));
                 LocalDate dateDebut_local = dateDebutM.getValue();
                 LocalDate dateFin_local = dateFinM.getValue();
@@ -233,7 +234,7 @@ public class GererEvenementController implements Initializable {
 
     void selected_item(int ID_event, String nom_event, String description_event, String lieu_event, String type_event, Date dateDebut_event, Date dateFin_event, int capacite_event, String image_event, double prix_event) {
 //       ServicePromotion P = new ServicePromotion();
-//System.out.println(id+nompromotion+description+dateP);
+System.out.println(image_event);
 
         LocalDate dateDebut_local = dateDebut_event.toLocalDate();
         LocalDate dateFin_local = dateFin_event.toLocalDate();
@@ -248,22 +249,15 @@ public class GererEvenementController implements Initializable {
         dateDebutM.setValue(dateDebut_local);
         dateFinM.setValue(dateFin_local);
 
-        String imagePath = "http://"+ image_event; // chemin de l'image
+        String imagePath = xamppFolderPath + image_event; // Constructing the image path
         Image image = new Image(imagePath);
-        imageevenement. setImage(image);
+
+// Set the image to the ImageView
+        imageevenement.setImage(image);
         imageevenement.setPreserveRatio(true);
 
-  /* // imageevenement.setImage(new Image (xamppFolderPath + image_event));
-   System.out.println(xamppFolderPath + image_event);
-   String test = xamppFolderPath + image_event;
+        System.out.println(imagePath); // Verify the constructed path
 
-    try {
-            BufferedImage bufferedImage = ImageIO.read(new File(test));
-            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-            imageevenement.setImage(image);
-        } catch (IOException ex) {
-            System.out.println("could not get the image");
-        } */
 
     }
 

@@ -86,8 +86,8 @@ public class DetailEvenementController implements Initializable {
         this.datefin_detail.setText(String.valueOf(dateFin_local));
 
         String imagePath = "http://"+event.getImage_event(); // chemin de l'image
-        Image image = new Image(imagePath);
-        image_detail.setImage(image);
+       // Image image = new Image(imagePath);
+       // image_detail.setImage(image);
         image_detail.setPreserveRatio(true);
               /*  image_detail.setFitWidth(150);
                 image_detail.setFitHeight(150);*/

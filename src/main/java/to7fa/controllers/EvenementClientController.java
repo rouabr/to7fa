@@ -8,7 +8,7 @@ import java.time.Instant;
 
 import to7fa.interfaces.MyListener;
 import to7fa.entities.evenement;
-import to7fa.services.ServiceEvenement;
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -41,6 +41,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import to7fa.services.ServiceEvenement;
 
 /**
  * FXML Controller class
@@ -314,7 +315,16 @@ public class EvenementClientController implements Initializable {
         }
         AjoutParticipationController HomeScene = loader.getController();
         System.out.println("aaaaa");
+        if (!event_id.getText().equals("id")) {
+            int ID_event = Integer.parseInt(event_id.getText());
+            // Reste du code...
+        } else {
+            // Gérer le cas où event_id.getText() est "id"
+            // Peut-être afficher un message d'erreur, loguer, etc.
+        }
         HomeScene.selected_item2(Integer.parseInt(event_id.getText()));
+
+
         AjoutParticipationController AjoutParticipationController = loader.getController();
         AjoutParticipationController.setUpdate(true);
 

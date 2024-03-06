@@ -14,19 +14,13 @@ import to7fa.services.ServiceEvenement;
 import to7fa.services.ServiceParticipationEvenement;
 
 
-import java.awt.Desktop;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 
 import static java.lang.Integer.parseInt;
-import java.net.HttpURLConnection;
+import static to7fa.controllers.mail.send;
+
 import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -47,7 +41,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 //import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 //import net.fortuna.ical4j.model.Calendar;
@@ -82,6 +75,8 @@ public class AjoutParticipationController implements Initializable {
     @FXML
     private TextField TF_numtel;
 
+
+
     private Stage stage;
 
     int userConnecte = 2;
@@ -114,6 +109,7 @@ public class AjoutParticipationController implements Initializable {
 
     @FXML
     private void ajouterParticipation(ActionEvent event) throws SQLException, IOException {
+        send("roua.benromdhane@esprit.tn");
         participation_evenement part = new participation_evenement();
         ServiceParticipationEvenement SPE = new ServiceParticipationEvenement();
         ServiceEvenement ev = new ServiceEvenement();
@@ -144,8 +140,9 @@ public class AjoutParticipationController implements Initializable {
             int idParticipation = SPE.getIdDerniereParticipation();
 
 
+
             // Générer le QR code
-            String codeData = "Nom du participant : " + ev.getNomUser(part.getID_user()) + ", ID de la participation: " + idParticipation + ", Nom de l'évènement: " + ev.getNom(part.getID_event()) + ", Date de début: " + ev.getDateDebut(part.getID_event()) + ", Date de fin: " + ev.getDateFin(part.getID_event());
+          /*  String codeData = "Nom du participant : " + ev.getNomUser(part.getID_user()) + ", ID de la participation: " + idParticipation + ", Nom de l'évènement: " + ev.getNom(part.getID_event()) + ", Date de début: " + ev.getDateDebut(part.getID_event()) + ", Date de fin: " + ev.getDateFin(part.getID_event());
             String filePath = "src/qrcode/qrcode.pdf";
             int size = 250;
             String fileType = "png";

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="348.0" prefWidth="511.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CaptchaFXML">
+   <children>
+      <AnchorPane layoutY="-8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="613.0" style="-fx-background-color: #000000;">
+         <children>
+            <ImageView fitHeight="410.0" fitWidth="614.0" layoutY="4.0">
+               <image>
+                  <Image url="@assets/desktop-wallpaper-brown-background-design-trends-brown-abstract.jpg" />
+               </image>
+            </ImageView>
+            <Label fx:id="captchaLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="254.0" layoutY="113.0" prefHeight="27.0" prefWidth="93.0" style="-fx-background-color: transparent; -fx-border-radius: 5;" text="captcha" textFill="WHITE">
+               <font>
+                  <Font name="Ink Free" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="captchaCode" layoutX="219.0" layoutY="153.0" prefHeight="34.0" prefWidth="162.0" promptText="Enter captcha" />
+            <Label fx:id="msg" alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="79.0" text="Enter the captcha below" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Cambria" size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="refreshCaptcha" contentDisplay="GRAPHIC_ONLY" layoutX="381.0" layoutY="149.0" mnemonicParsing="false" onAction="#onRefreshCaptcha" style="-fx-background-color: transparent;" stylesheets="@../../../../../Downloads/Captcha_Generator_and_validator_in_javafx-master/Captcha_Generator_and_validator_in_javafx-master/src/main/resources/com/example/captchageneratorinjavafx/style.css">
+               <font>
+                  <Font name="Garamond" size="12.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="34.0" fitWidth="39.0">
+                     <image>
+                        <Image url="@assets/—Pngtree—white%20refresh%20icon_4543883.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="submit" layoutX="269.0" layoutY="205.0" mnemonicParsing="false" onAction="#onSubmit" styleClass="add-btn" stylesheets="@style.css" text="Submit">
+               <font>
+                  <Font name="Cambria" size="14.0" />
+               </font></Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

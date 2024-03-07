@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -13,11 +14,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="781.0" prefWidth="1570.0"  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="to7fa.controllers.ParticipationClientController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="781.0" prefWidth="1570.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="to7fa.controllers.ParticipationClientController">
    <center>
-      <AnchorPane prefHeight="781.0" prefWidth="1174.0" style="-fx-background-color: #EFF8FA;"  BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="781.0" prefWidth="1174.0" styleClass="fruit-item" stylesheets="@css/ajoutevenement.css" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane layoutX="140.0" layoutY="90.0" prefHeight="655.0" prefWidth="872.0" stylesheets="@css/participationclient.css">
+            <ScrollPane layoutX="140.0" layoutY="90.0" prefHeight="655.0" prefWidth="872.0" styleClass="fruit-item">
                <content>
                   <GridPane fx:id="participation_grid" prefHeight="82.0" prefWidth="958.0">
                      <rowConstraints>
@@ -25,6 +26,10 @@
                      </rowConstraints>
                   </GridPane>
                </content>
+               <stylesheets>
+                  <URL value="@css/participationclient.css" />
+                  <URL value="@css/ajoutevenement.css" />
+               </stylesheets>
             </ScrollPane>
             <Text layoutX="436.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mes participations">
                <font>
@@ -35,7 +40,7 @@
       </AnchorPane>
    </center>
    <left>
-      <VBox prefHeight="781.0" prefWidth="333.0" style="-fx-background-color: #CCE3EA;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="781.0" prefWidth="333.0" styleClass="right-bar" stylesheets="@css/ajoutevenement.css" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER" prefHeight="186.0" prefWidth="333.0">
                <children>
@@ -48,7 +53,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="72.0" prefWidth="333.0">
                <children>
-                  <Button fx:id="btn_evenements" mnemonicParsing="false" prefHeight="48.0" prefWidth="212.0" stylesheets="@css/StyleY.css" text="Évènements" textFill="#2b4570">
+                  <Button fx:id="btn_evenements" mnemonicParsing="false" prefHeight="48.0" prefWidth="212.0" styleClass="fruit-item" stylesheets="@css/ajoutevenement.css" text="Évènements">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font>

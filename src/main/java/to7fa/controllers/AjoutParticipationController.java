@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 
 import static java.lang.Integer.parseInt;
+import static to7fa.controllers.SMS.sendSMS;
 import static to7fa.controllers.mail.send;
 
 import java.net.URL;
@@ -109,6 +110,7 @@ public class AjoutParticipationController implements Initializable {
 
     @FXML
     private void ajouterParticipation(ActionEvent event) throws SQLException, IOException {
+        sendSMS("+21693865916","BIENVENU");
         send("roua.benromdhane@esprit.tn");
         participation_evenement part = new participation_evenement();
         ServiceParticipationEvenement SPE = new ServiceParticipationEvenement();

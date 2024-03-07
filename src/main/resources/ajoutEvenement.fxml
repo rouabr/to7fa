@@ -18,7 +18,7 @@
    <center>
       <AnchorPane prefHeight="781.0" prefWidth="1233.0" style="-fx-background-color: #e3f5fa;" stylesheets="@css/StyleY.css" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane id="AnchorPane" layoutX="-2.0" layoutY="1.0" prefHeight="781.0" prefWidth="1274.0" style="-fx-background-color: #EFF8FA;" styleClass="mainFxmlClass" stylesheets="@css/StyleY.css">
+            <AnchorPane id="AnchorPane" layoutX="-2.0" layoutY="1.0" prefHeight="781.0" prefWidth="1274.0" styleClass="fruit-item">
                <children>
                   <Button fx:id="btnPDF" layoutX="982.0" layoutY="672.0" mnemonicParsing="false" onAction="#ajouterEvenement" prefHeight="39.0" prefWidth="138.0" styleClass="right-bar" stylesheets="@css/ajoutevenement.css" text="Ajouter">
                      <font>
@@ -125,6 +125,10 @@
                      </image>
                   </ImageView>
                </children>
+               <stylesheets>
+                  <URL value="@css/StyleY.css" />
+                  <URL value="@css/ajoutevenement.css" />
+               </stylesheets>
             </AnchorPane>
          </children>
       </AnchorPane>

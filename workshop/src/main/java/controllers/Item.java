@@ -15,6 +15,9 @@ public class Item {
     private Label idItem;
 
     @FXML
+    private Label titreItem;
+
+    @FXML
     private ImageView imageItem;
 
     @FXML
@@ -23,20 +26,32 @@ public class Item {
     @FXML
     private Label statusItem;
     public void setData(Oeuvre oev) {
-
         this.oeuv = oev;
-        System.out.println("setrdyfu");
         idItem.setText(Integer.toString(oev.getId_oeuvre()));
-        System.out.println("this id"+oev.getId_oeuvre());
+        titreItem.setText(oev.getTitre());
         prixItem.setText(Float.toString(oev.getPrix()));
         statusItem.setText(oev.getStatus());
         dateItem.setText(oev.getDate());
-        System.out.println("zefg");
-        //prixLabel.setText(fxMain.CURRENCY + oev.getPrice());
 
-      /*  Image image = new Image(getClass().getResourceAsStream(oev.getLienImg()));
-
-        imageItem.setImage(image);
-        System.out.println("zegtryu");*/
+        String imageUrl = oev.getLienImg();
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            try {
+                Image image = new Image(imageUrl);
+                imageItem.setImage(image);
+            } catch (Exception e) {
+                // Handle the exception (e.g., log it, show an error message)
+                System.err.println("Error loading image: " + e.getMessage());
+                e.printStackTrace();
+                // You might want to set a default image here
+                // Image image = new Image("default_image.png");
+                // imageItem.setImage(image);
+            }
+        } else {
+            // Si l'URL de l'image est null ou vide, vous pouvez définir une image par défaut ici
+            // Image image = new Image("default_image.png");
+            // imageItem.setImage(image);
+        }
+        System.out.println("Titre: " + oev.getTitre());
     }
+
 }

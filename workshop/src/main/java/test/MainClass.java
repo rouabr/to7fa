@@ -40,7 +40,7 @@ public class MainClass {
             // Call the insertOne method to insert the person into the database
             //service.insertOne(oeuvre);
             System.out.println("oeuvre inserted successfully.");
-            service.applyPromotions();
+           // service.applyPromotions();
             System.out.println("Promotions applied successfully.");
         } catch (SQLException e) {
             // Handle any exceptions that occur during the insertion process

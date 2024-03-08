@@ -2,6 +2,7 @@ package services;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Categorie;
+import models.Oeuvre;
 import utils.DBConnection;
 
 import java.sql.*;
@@ -69,6 +70,37 @@ public class ServiceCategorie implements CRUD<Categorie> {
         return categorieList;
     }
 
+    @Override
+    public void updateOne1(int id_oeuvre, Oeuvre updatedOeuvre, String imagePath) throws SQLException {
+
+    }
+
+    public List<String> getAllCategoriesNames() {
+        List<String> names = new ArrayList<>();
+        try {
+            // Establish a connection to your database
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pidev", "root", "");
+
+            // Create a statement
+            Statement statement = connection.createStatement();
+
+            // Execute a query to get all museum names
+            ResultSet resultSet = statement.executeQuery("SELECT nom_cat FROM categorie");
+
+            // Iterate over the result set and add each museum name to the list
+            while (resultSet.next()) {
+                names.add(resultSet.getString("nom_cat"));
+            }
+
+            // Close the connections
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return names;
+    }
     @Override
     public void updateOne(Categorie categorie) throws SQLException {
         String sql = "UPDATE categorie SET nom_cat = ? WHERE id_cat = ?";

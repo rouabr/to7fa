@@ -1,20 +1,34 @@
 package services;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 import models.Categorie;
 import models.Oeuvre;
 import models.User;
 import utils.DBConnection;
-import java.util.Calendar;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
+import java.sql.SQLException;
+import java.sql.Connection;
+
+
+import static java.sql.DriverManager.getConnection;
+
 public class ServiceOeuvre implements CRUD<Oeuvre> {
     private Connection cnx;
+    public Connection getConnection() throws SQLException {
+        // JDBC URL, username, and password of MySQL server
+        String url = "jdbc:mysql://localhost:3306/tachedyeli";
+        String user = "root";
+        String password = "";
+
+        // Establish a connection
+        Connection connection = DriverManager.getConnection(url, user, password);
+        return connection;
+    }
 
     public ServiceOeuvre() {
         cnx = DBConnection.getInstance().getCnx();
@@ -22,7 +36,7 @@ public class ServiceOeuvre implements CRUD<Oeuvre> {
         User user = new User(1,"jhonDoe","1234567","john@example.com","password123","1990-01-01","Male","Regular","2024-02-21","2024-02-21","1234");
     @Override
     public void insertOne(Oeuvre oeuvre) throws SQLException {
-        String sql = "INSERT INTO oeuvre ( titre, description, prix, date, status, lienImg) VALUES ( ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO oeuvre ( titre, description, prix, date, status, lienImg,id_cat,idUser) VALUES ( ?, ?, ?, ?, ?, ?,?,?)";
 
         try (PreparedStatement statement = cnx.prepareStatement(sql)) {
 
@@ -41,6 +55,10 @@ public class ServiceOeuvre implements CRUD<Oeuvre> {
             statement.setString(5, oeuvre.getStatus());
             statement.setString(6, oeuvre.getLienImg());
 
+            statement.setInt(7, oeuvre.getId_cat());
+            statement.setInt(8, oeuvre.getUser());
+
+
 
 
             statement.executeUpdate();
@@ -48,6 +66,12 @@ public class ServiceOeuvre implements CRUD<Oeuvre> {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void updateOne(Oeuvre oeuvre) throws SQLException {
+
+    }
+
     @Override
     public List<Oeuvre> selectAll()throws SQLException {
         List<Oeuvre> OeuvreList=new ArrayList<>();
@@ -101,28 +125,29 @@ public class ServiceOeuvre implements CRUD<Oeuvre> {
         }
     }*/
     @Override
-    public void updateOne(Oeuvre oeuvre) throws SQLException {
-        String sql = "UPDATE oeuvre SET titre = ?, description = ?, prix = ?, date = ?, status = ?, lienImg = ? WHERE id_oeuvre = ?";
+    public void updateOne1(int id_oeuvre, Oeuvre updatedOeuvre, String imagePath) throws SQLException {
+        String sql = "UPDATE musee SET titre = ?, description = ?, prix = ?, date = ?, status = ?, id_cat = ?,idUser= ? WHERE id_oeuvre = ?";
 
         try (PreparedStatement statement = cnx.prepareStatement(sql)) {
 
-            statement.setString(1, oeuvre.getTitre());
-            statement.setString(2, oeuvre.getDescription());
-            statement.setFloat(3, oeuvre.getPrix());
-            statement.setString(4, oeuvre.getDate());
-            statement.setString(5, oeuvre.getStatus());
-            statement.setString(6, oeuvre.getLienImg());
-            statement.setInt(7, oeuvre.getId_oeuvre());
+            statement.setString(1, updatedOeuvre.getTitre());
+            statement.setString(2, updatedOeuvre.getDescription());
+            statement.setFloat(3, updatedOeuvre.getPrix());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            java.util.Date parsedDate = dateFormat.parse(updatedOeuvre.getDate());
+            java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
 
-            int rowsUpdated = statement.executeUpdate();
-            if (rowsUpdated > 0) {
-                System.out.println("Oeuvre updated successfully.");
-            } else {
-                System.err.println("No oeuvre found with the provided ID.");
+            statement.setDate(4, sqlDate);
+            statement.setString(5, updatedOeuvre.getStatus());
+
+            statement.setInt(6, id_oeuvre);
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new SQLException("Museum with ID " + id_oeuvre + " not found.");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.err.println("Failed to update oeuvre in the database.");
+            System.out.println("Museum with ID " + id_oeuvre + " updated successfully.");
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
     }
 @Override
@@ -179,6 +204,8 @@ public class ServiceOeuvre implements CRUD<Oeuvre> {
 
         return oeuvres;
     }
+
+
     // Method to apply promotions on Oeuvre prices for a period of 15 days from the date of disposition
    /* public void applyPromotions() {
         try {
@@ -205,51 +232,104 @@ public class ServiceOeuvre implements CRUD<Oeuvre> {
             System.err.println("Failed to apply promotions to Oeuvres.");
         }
     }*/
-    public void applyPromotions() {
-        // Get the current date
-        Date currentDate = new Date();
-
-        // Calculate the end date of the promotion period (15 days from the current date)
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(currentDate);
-        calendar.add(Calendar.DATE, 15); // Add 15 days
-        Date endDate = calendar.getTime();
-
-        // SQL query to update the price of Oeuvres within the promotion period
-        String sql = "UPDATE oeuvre SET prix = ? WHERE STR_TO_DATE(date, '%d-%m-%Y') <= ?";
-
-        try (PreparedStatement statement = cnx.prepareStatement(sql)) {
-            // Set the new price (for example, reducing the price by 15%)
-            float discountPercentage = 0.15f; // 15% discount
-
-            // Loop through each Oeuvre and check if it falls within the promotion period
-            for (Oeuvre oeuvre : getAllOeuvres()) {
-                // Parse the string date into a Date object
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                Date oeuvreDate = dateFormat.parse(oeuvre.getDate());
-
-                // If the date of disposition is within the promotion period
-                if (oeuvreDate.compareTo(currentDate) >= 0 && oeuvreDate.compareTo(endDate) <= 0) {
-                    // Calculate the new price with the discount
-                    float newPrice = oeuvre.getPrix() * (1 - discountPercentage);
-
-                    // Update the price in the database
-                    statement.setFloat(1, newPrice);
-                    statement.setDate(2, new java.sql.Date(oeuvreDate.getTime())); // Assuming date is stored as java.util.Date
-                    statement.executeUpdate();
-
-                    // Send a notification
-                    sendNotification("Promotion applied to Oeuvre with ID " + oeuvre.getId_oeuvre() + ": New price is $" + newPrice);
-                }
-            }
-        } catch (SQLException | ParseException e) {
-            e.printStackTrace();
-            System.err.println("Failed to apply promotions to Oeuvres.");
-        }
-    }
+//    public void applyPromotions() {
+//        // Get the current date
+//        Date currentDate = new Date();
+//
+//        // Calculate the end date of the promotion period (15 days from the current date)
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTime(currentDate);
+//        calendar.add(Calendar.DATE, 15); // Add 15 days
+//        Date endDate = calendar.getTime();
+//
+//        // SQL query to update the price of Oeuvres within the promotion period
+//        String sql = "UPDATE oeuvre SET prix = ? WHERE STR_TO_DATE(date, '%d-%m-%Y') <= ?";
+//
+//        try (PreparedStatement statement = cnx.prepareStatement(sql)) {
+//            // Set the new price (for example, reducing the price by 15%)
+//            float discountPercentage = 0.15f; // 15% discount
+//
+//            // Loop through each Oeuvre and check if it falls within the promotion period
+//            for (Oeuvre oeuvre : getAllOeuvres()) {
+//                // Parse the string date into a Date object
+//                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+//                Date oeuvreDate = dateFormat.parse(oeuvre.getDate());
+//
+//                // If the date of disposition is within the promotion period
+//                if (oeuvreDate.compareTo(currentDate) >= 0 && oeuvreDate.compareTo(endDate) <= 0) {
+//                    // Calculate the new price with the discount
+//                    float newPrice = oeuvre.getPrix() * (1 - discountPercentage);
+//
+//                    // Update the price in the database
+//                    statement.setFloat(1, newPrice);
+//                    statement.setDate(2, new java.sql.Date(oeuvreDate.getTime())); // Assuming date is stored as java.util.Date
+//                    statement.executeUpdate();
+//
+//                    // Send a notification
+//                    sendNotification("Promotion applied to Oeuvre with ID " + oeuvre.getId_oeuvre() + ": New price is $" + newPrice);
+//                }
+//            }
+//        } catch (SQLException | ParseException e) {
+//            e.printStackTrace();
+//            System.err.println("Failed to apply promotions to Oeuvres.");
+//        }
+//    }
 
     // Method to send a notification (replace this with appropriate notification mechanism)
     private void sendNotification(String message) {
         JOptionPane.showMessageDialog(null, message, "Promotion Notification", JOptionPane.INFORMATION_MESSAGE);
+    }
+    public List<Oeuvre> searchByTitre(String titre) throws SQLException {
+        List<Oeuvre> oeuvres = new ArrayList<>();
+        String query = "SELECT * FROM oeuvre WHERE titre LIKE ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1,  titre + "%"); // Search for titre containing the given string
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Create Oeuvre objects from the result set and add them to the list
+                    Oeuvre oeuvre = new Oeuvre(
+                            resultSet.getString("titre"),
+                            resultSet.getString("description"),
+                            resultSet.getFloat("prix"),
+                            resultSet.getString("date"),
+                            resultSet.getString("status"),
+                            resultSet.getString("lienImage")
+                    );
+                    oeuvres.add(oeuvre);
+                }
+            }
+        }
+
+        return oeuvres;
+    }
+
+    public List<Oeuvre> triDesc(List<Oeuvre> oeuvres, int i) {
+        switch (i) {
+            // Sorting by prix in descending order
+            case 0:
+                Collections.sort(oeuvres, Comparator.comparing(Oeuvre::getPrix).reversed());
+                break;
+            // Add more cases for different sorting criteria if needed
+            default:
+                // Handle other cases or default behavior
+                break;
+        }
+        return oeuvres; // Return the sorted list
+    }
+    public List<Oeuvre> triAsc(List<Oeuvre> oeuvres, int i) {
+        switch (i) {
+            // Sorting by prix in ascending order
+            case 0:
+                Collections.sort(oeuvres, Comparator.comparing(Oeuvre::getPrix));
+                break;
+            // Add more cases for different sorting criteria if needed
+            default:
+                // Handle other cases or default behavior
+                break;
+        }
+        return oeuvres; // Return the sorted list
     }
 }

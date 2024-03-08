@@ -44,6 +44,18 @@ public class Oeuvre {
     }
 
 
+    public Oeuvre(String titre, String description, float prix, String date, String status, String lienImg,int id_cat,int user_id) {
+        this.titre = titre;
+        this.description = description;
+        this.prix = prix;
+        this.date = date;
+        this.status = status;
+        this.lienImg = lienImg;
+        this.id_cat = id_cat;
+        this.user_id = user_id;
+
+
+    }
 
 
 

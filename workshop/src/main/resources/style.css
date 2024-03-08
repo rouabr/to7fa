@@ -69,6 +69,13 @@
         -fx-background-color:rgb(188,143,143);
         -fx-border-color:rgb(159,159,159);
 }
+.fruit-item{
+        -fx-background-color: #FFFFFF;
+        -fx-background-radius: 30;
+}
+.shadowwww{
+        -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
+}
 /*.right-bar{
         -fx-background-color: #D3D3D3;
 }

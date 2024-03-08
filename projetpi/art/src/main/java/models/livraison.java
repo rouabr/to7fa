@@ -20,6 +20,25 @@ public class livraison {
 
     private int id_commande;
 
+    public String getNom_coomande() {
+        return nom_coomande;
+    }
+
+    public void setNom_coomande(String nom_coomande) {
+        this.nom_coomande = nom_coomande;
+    }
+
+    public String getNom_livreur() {
+        return Nom_livreur;
+    }
+
+    public void setNom_livreur(String nom_livreur) {
+        Nom_livreur = nom_livreur;
+    }
+
+    private String nom_coomande;
+    private String Nom_livreur;
+
     public int getId_livreur() {
         return id_livreur;
     }
@@ -35,24 +54,24 @@ public class livraison {
         }
 
 
-        public livraison(String date_livraison, String adresse_livraison, String status_livraison, Float frais_livraison, int id_livreur, int id_commande) {
+        public livraison(String date_livraison, String adresse_livraison, String status_livraison, Float frais_livraison, String nom_livreur, String nom_commande) {
 
             this.date_livraison = date_livraison;
             this.adresse_livraison = adresse_livraison;
             this.status_livraison = status_livraison;
             this.frais_livraison = frais_livraison;
-            this.id_livreur = id_livreur;
-            this.id_commande = id_commande;
+            this.Nom_livreur = nom_livreur;
+            this.nom_coomande = nom_commande;
         }
 
-    public livraison(int id_livraison,String date_livraison, String adresse_livraison, String status_livraison, Float frais_livraison, int id_livreur, int id_commande) {
+    public livraison(int id_livraison,String date_livraison, String adresse_livraison, String status_livraison, Float frais_livraison, String nom_livreur, String nom_commande) {
           this.id_livraison=id_livraison;
         this.date_livraison = date_livraison;
         this.adresse_livraison = adresse_livraison;
         this.status_livraison = status_livraison;
         this.frais_livraison = frais_livraison;
-        this.id_livreur = id_livreur;
-        this.id_commande = id_commande;
+        this.Nom_livreur = nom_livreur;
+        this.nom_coomande = nom_commande;
     }
 
         // Getters and Setters

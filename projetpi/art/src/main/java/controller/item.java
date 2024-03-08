@@ -14,6 +14,8 @@ import java.sql.SQLException;
 public class item {
     @FXML
     private GridPane grid;
+    @FXML
+    private Label prix;
 
     @FXML
     private Label adress_livraison;
@@ -39,6 +41,7 @@ public class item {
         System.out.println("lmd");
         nom_commande.setText(String.valueOf(liv.getId_commande()));
         nom_transporteur.setText(String.valueOf(liv.getId_livreur()));
+        prix.setText(String.valueOf(liv.getFrais()));
 
     }
 

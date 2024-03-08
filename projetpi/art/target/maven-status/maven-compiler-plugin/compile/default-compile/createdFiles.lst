@@ -3,3 +3,4 @@ models\Livreur.class
 controller\item.class
 controller\affichelivraison.class
 services\ServiceLivreur.class
+models\GeneratePdf.class

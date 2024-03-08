@@ -78,7 +78,7 @@ public class ServiceLivreur implements CRUD<Livreur>{
     }
     public ObservableList<Livreur> getLivreurs() {
         ObservableList<Livreur> livreurs = FXCollections.observableArrayList();
-        String query = "SELECT * FROM livreur";
+        String query = "SELECT * FROM livreur ";
         ResultSet rs = null;
         try (Connection cnx = DBConnection.getInstance().getCnx();
              PreparedStatement reservationStatement = cnx.prepareStatement(query)) {
@@ -106,6 +106,16 @@ public class ServiceLivreur implements CRUD<Livreur>{
     }
     @Override
     public List<Livreur> selectAll() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public List<Livreur> selectAlltri() throws SQLException {
+        return null;
+    }
+
+    @Override
+    public List<Livreur> selectByname(String ch) throws SQLException {
         return null;
     }
 }

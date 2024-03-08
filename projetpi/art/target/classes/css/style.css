@@ -4,7 +4,7 @@
 }
 
 .use-payment{
-    -fx-background-color:#D4C4B4;
+    -fx-background-color:#CAA6A6;
     -fx-background-radius: 100;
 }
 .a-box-group{
@@ -25,7 +25,7 @@
 }
 
 .right-bar{
-    -fx-background-color: #742B1F;
+    -fx-background-color: #944E63;
 }
 .method{
     -fx-background-color: white;
@@ -54,69 +54,21 @@
     -fx-background-radius: 100;
 }
 .delete-btn{
-    -fx-background-color: #D4C4B4;
+    -fx-background-color: #B47B84;
     -fx-background-radius: 100;
 }
 .free-delivery-card{
-    -fx-background-color: #742B1F;
+    -fx-background-color: #944E63;
     -fx-background-radius: 30;
 }
 
 .shopping-online-card{
-    -fx-background-color: #BAEAC3;
+    -fx-background-color: #B47B84;
     -fx-background-radius: 30;
-}
-.les-button{
-    -fx-background-color: #742b1f;
-    -fx-background-radius: 30;
-}
-.search-boxyossra{
-    -fx-background-color:#FFFFFF;
-    -fx-background-radius: 100;
-}
-
-.transparentyossra{
-    -fx-background-color: rgba(0,0,0,0);
-}
-
-
-
- .SCROLLPANyossra{
-      -fx-background:#e2c09e;
-
-  }.scroll-baryossra{
-       -fx-background-color: #e8b8b0;
-
-   }
-
-
-.shadowyossra{
-    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);
-}
-
-.top-baryossra{
-    -fx-background-color: #e2c09e;
-}
-.img.rounded-cornersyossra {
-    border-radius: 30px;
-}
-.selectedyossra{
-    -fx-background-color: #766f64;
-}
-
-.Product-Vboxyossra{
-    -fx-background-color: #bb8e6d;
-    -fx-background-radius: 30;
-    border-radius: 30px;
-}
-
-.table-column-cellyossra{
-    -fx-background-color: rgb(161, 111, 97);
-    -fx-border-color:rgb(159,159,159);
 }
 
 .design2{
-    -fx-background-color: #FEECE2;
+    -fx-background-color: #FFE7E7;
     -fx-background-radius: 30;
 }
 
@@ -125,9 +77,20 @@
     -fx-background-radius: 30;
 }
 .fruit-item2{
-    -fx-background-color: #FFFFFF;
-    -fx-background-radius: 30;
-    -fx-border-color: #878787;
-    -fx-border-width: 1px;
-    -fx-border-radius: 30;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-width: 0 0 1 0; /* Top, right, bottom, left */
+    -fx-border-color: lightblue;
+}
+.choice-box .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.choice-box .arrow-button .arrow {
+    -fx-background-color: transparent;
+}
+
+.choice-box .box {
+    -fx-border-color: transparent transparent #ADD8E6 transparent; /* Light blue underline */
+    -fx-border-width: 0 0 1 0; /* Top, right, bottom, left */
 }

@@ -29,27 +29,27 @@
             <children>
                 <TextField fx:id="tfnom" stylesheets="@../css/style.css">
                <styleClass>
+                  <String fx:value="search-box" />
                   <String fx:value="shadow" />
-                  <String fx:value="search-button" />
                </styleClass></TextField>
                 <TextField fx:id="tfprenom" layoutX="10.0" layoutY="10.0" stylesheets="@../css/style.css">
                <styleClass>
-                  <String fx:value="search-button" />
+                  <String fx:value="search-box" />
                   <String fx:value="shadow" />
                </styleClass></TextField>
                 <TextField fx:id="tfadresse" layoutX="10.0" layoutY="36.0" stylesheets="@../css/style.css">
                <styleClass>
-                  <String fx:value="search-button" />
+                  <String fx:value="search-box" />
                   <String fx:value="shadow" />
                </styleClass></TextField>
                 <TextField fx:id="tftelephone" layoutX="10.0" layoutY="61.0" stylesheets="@../css/style.css">
                <styleClass>
-                  <String fx:value="search-button" />
+                  <String fx:value="search-box" />
                   <String fx:value="shadow" />
                </styleClass></TextField>
                 <TextField fx:id="tfmatricule" layoutX="10.0" layoutY="87.0" stylesheets="@../css/style.css">
                <styleClass>
-                  <String fx:value="search-button" />
+                  <String fx:value="search-box" />
                   <String fx:value="shadow" />
                </styleClass></TextField>
             </children>
@@ -59,8 +59,8 @@
             <Font size="15.0" />
          </font>
          <styleClass>
-            <String fx:value="les-button" />
             <String fx:value="shadow" />
+            <String fx:value="delete-btn" />
          </styleClass></Button>
         <TableView fx:id="tvlivreurs" layoutX="235.0" layoutY="151.0" onMouseClicked="#getData" prefHeight="240.0" prefWidth="382.0" styleClass="table-column-cellyossra" stylesheets="@../css/style.css">
             <columns>
@@ -76,16 +76,16 @@
             <Font name="Gill Sans MT" size="15.0" />
          </font>
          <styleClass>
-            <String fx:value="les-button" />
             <String fx:value="shadow" />
+            <String fx:value="delete-btn" />
          </styleClass></Button>
         <Button fx:id="modifeirbtn" layoutX="24.0" layoutY="374.0" mnemonicParsing="false" onAction="#modifierLivreur" stylesheets="@../css/style.css" text="Modifier" textFill="WHITE">
          <font>
             <Font name="Gill Sans MT" size="15.0" />
          </font>
          <styleClass>
-            <String fx:value="les-button" />
             <String fx:value="shadow" />
+            <String fx:value="delete-btn" />
          </styleClass></Button>
         <Separator layoutX="85.0" layoutY="139.0" prefHeight="3.0" prefWidth="598.0">
             <opaqueInsets>
@@ -107,5 +107,14 @@
             <Image url="@../img/defredfsed.PNG" />
          </image>
       </ImageView>
+      <Button fx:id="btnPDF" layoutX="347.0" layoutY="405.0" mnemonicParsing="false" onAction="#generatePDF" prefHeight="23.0" prefWidth="72.0" stylesheets="@../css/style.css" text="PDF" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans MT" size="13.0" />
+         </font>
+         <styleClass>
+            <String fx:value="delete-btn" />
+            <String fx:value="shadow" />
+         </styleClass>
+      </Button>
     </children>
 </AnchorPane>

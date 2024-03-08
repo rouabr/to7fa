@@ -1,4 +1,5 @@
 package controller;
+import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -9,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import models.GeneratePdf;
 import models.Livreur;
 import services.ServiceLivreur;
 
@@ -45,6 +48,8 @@ public class LivreurFXML {
     private Button supprimerbtn;
     @FXML
     private TextField tfadresse;
+    @FXML
+    private Button btnPDF;
 
     @FXML
     private TextField tfmatricule;
@@ -132,6 +137,34 @@ public class LivreurFXML {
             tftelephone.setText(livreur.getTelephone());
 
         }
+    }
+    @FXML
+    void generatePDF(ActionEvent event) {
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save PDF File");
+            fileChooser.setInitialFileName("liste_livreurs.pdf");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+
+            File file = fileChooser.showSaveDialog(btnPDF.getScene().getWindow());
+
+            if (file != null) {
+                ObservableList<Livreur> livreurs = new ServiceLivreur().getLivreurs();
+
+                if (!livreurs.isEmpty()) {
+                    GeneratePdf.generatePDF(livreurs, file);
+                    System.out.println("PDF generated successfully.");
+                } else {
+                    System.out.println("No data to generate PDF.");
+                }
+            } else {
+                System.out.println("No file selected.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("An error occurred while generating PDF.");
+        }
+
     }
     @FXML
     void modifierLivreur(ActionEvent event) {

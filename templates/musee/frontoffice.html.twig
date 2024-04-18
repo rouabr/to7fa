@@ -1,0 +1,291 @@
+{% extends 'basefront.html.twig' %}
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Musées!{% endblock %}</title>
+		<link rel="icon" type="image/png" href="{{ asset('/photos/to7fa-removebg-preview.png') }}">		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-o2FWgrFXkGzeQrjtJgAMjPO7z5FJmP1PQtXtlx0bTVazlMLf1FQwliSxLtkhC8xlCkdy9ag+YHdntqC6V/ebUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+{% block stylesheets %}
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-o2FWgrFXkGzeQrjtJgAMjPO7z5FJmP1PQtXtlx0bTVazlMLf1FQwliSxLtkhC8xlCkdy9ag+YHdntqC6V/ebUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+<link href="{{ asset('assets/css/linearicons.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/magnific-popup.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/nice-select.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/owl.carousel.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-o2FWgrFXkGzeQrjtJgAMjPO7z5FJmP1PQtXtlx0bTVazlMLf1FQwliSxLtkhC8xlCkdy9ag+YHdntqC6V/ebUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+/* Your additional CSS styles here */
+.museum-name {
+    font-size: 20px; /* Changer la taille de la police selon vos besoins */
+	color grey;
+}
+.museum-item {
+    position: relative; /* Assurez-vous que l'élément parent a une position relative */
+    display: inline-block;
+    margin: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: calc(30% - 50px); /* Pour afficher 5 musées par ligne */
+    box-sizing: border-box;
+    vertical-align: top;
+    text-align: center;
+    border-radius: 30px; /* Ajoutez des coins arrondis */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Ajoutez une ombre plus prononcée */
+}
+
+.details-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+	color: gray; 
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 30px; /* Ajoutez des coins arrondis */
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+	 text-decoration: none; /* Supprimer le soulignement du lien */
+    font-weight: normal;
+}
+.details-disabled {
+    color: #999; /* Couleur de texte grise */
+    cursor: not-allowed; /* Curseur non-cliquable */
+    text-decoration: none; /* Supprime la décoration de texte */
+    /* Ajoutez d'autres styles selon vos préférences */
+}
+
+.details-disabled:hover {
+    color: #999; /* La couleur reste grise même au survol */
+}
+
+.museum-item:hover .details-link {
+    opacity: 1;
+	color: gray; 
+}
+.museum-item img {
+    width: 100%; /* Réglez la largeur à 100% pour qu'elles s'adaptent toutes à la même largeur */
+    height: 180; /* Assurez-vous que la hauteur est automatique pour conserver les proportions */
+    max-width: 250px; /* Définissez une taille maximale si vous voulez limiter la largeur */
+    max-height: 250px; /* Définissez une taille maximale si vous voulez limiter la hauteur */
+}
+
+.museum-list {
+    width: 100%;
+    padding-left: 150px; /* Ajoutez le padding à gauche */
+    padding-top: 0; /* Réinitialisez le padding en haut si nécessaire */
+    padding-right: 0; /* Réinitialisez le padding à droite si nécessaire */
+    padding-bottom: 0;
+    margin: 0 auto;
+    list-style: none;
+}
+
+</style>
+{% endblock %}
+
+             {% block javascripts %}
+        <script src="{{ asset('assets/js/vendor/jquery-2.2.4.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="{{ asset('assets/js/vendor/bootstrap.min.js') }}"></script>           
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+        <script src="{{ asset('assets/js/easing.min.js') }}"></script>            
+        <script src="{{ asset('assets/js/hoverIntent.js') }}"></script>
+        <script src="{{ asset('assets/js/superfish.min.js') }}"></script>   
+        <script src="{{ asset('assets/js/jquery.ajaxchimp.min.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>    
+        <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>   
+        <script src="{{ asset('assets/js/imagesloaded.pkgd.min.js') }}"></script>
+        <script src="{{ asset('assets/js/justified.min.js') }}"></script>                    
+        <script src="{{ asset('assets/js/jquery.sticky.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.nice-select.min.js') }}"></script>          
+        <script src="{{ asset('assets/js/parallax.min.js') }}"></script>       
+        <script src="{{ asset('assets/js/mail-script.js') }}"></script>    
+        <script src="{{ asset('assets/js/main.js') }}"></script> 
+        {% endblock %}
+         
+    </head>
+{% block body %}
+   
+          <header id="header" id="home">
+			  	<div class="container header-top">
+			  		<div class="row">
+				  		<div class="col-6 top-head-left">
+				  			<ul>
+				  				<li><a href="#">Visit Us</a></li>
+				  				<li><a href="#">Buy Ticket</a></li>
+				  			</ul>
+				  		</div>
+				  		<div class="col-6 top-head-right">
+				  			<ul>
+		  						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-behance"></i></a></li>
+				  			</ul>
+				  		</div>			  			
+			  		</div>
+			  	</div>
+			  	<hr>
+<div class="container">
+    <div class="row align-items-center justify-content-between">
+        <div class="col-auto">
+          <div class="col-auto align-items-center">
+    <a href="index.html"><img src="/photos/to7fa-removebg-preview.png" alt="" title="" width="80" height="80" /></a>
+    <h1 class="text-white" style="font-size: 24px; margin-left: 10px;">TO7FA</h1>
+</div>
+        </div>
+        <div class="col-auto">
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li class="menu-active"><a href="{{ path('app_home') }}">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li class="menu-active"><a href="{{ path('app_musee_frontoffice') }}">Museums</a></li>
+                    <li><a href="event.html">Events</a></li>
+                    <li><a href="ticket.html">Ticket</a></li>
+                    <li><a href="blog-home.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="menu-has-children"><a href="">Pages</a>
+                        <ul>
+                            <li><a href="blog-single.html">Blog Single</a></li>
+                            <li><a href="category.html">Category</a></li>
+                            <li><a href="elements.html">Elements</a></li>
+                        </ul>
+                    </li>			          
+                </ul>
+            </nav><!-- #nav-menu-container -->
+        </div>
+    </div>
+	</div>
+</div>
+			  </header><!-- #header -->
+
+
+			<!-- start banner Area -->
+			<section class="banner-area relative" id="home">	
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row d-flex align-items-center justify-content-center">
+						<div class="about-content col-lg-12">
+							<h1 class="text-white">
+								Nos Musées			
+							</h1>	
+							<p class="text-white link-nav"><a href="{{ path('app_musee_frontoffice') }}">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="gallery.html"> Museums</a></p>
+						</div>											
+					</div>
+				</div>
+			</section>
+			<!-- End banner Area -->	
+
+
+			<!-- Start gallery Area -->
+<section class="gallery-area section-gap gallery-page-area align-items-center">
+
+
+
+    <ul class="museum-list">
+{% for musee in musees %}
+    {% if musee.nbrTicketsDisponibles > 0 %}
+        <li class="museum-item">
+            <h3 class="museum-name">Le musée de {{ musee.nomMusee }}</h3>
+            <img src="{{ asset(musee.imageMusee) }}" width='100%' />
+            <p>Situé à {{ musee.ville }}</p>
+            <a class="details-link" href="{{ path('app_musee_show_front', {'idMusee': musee.getIdMusee()}) }}">Voir plus de détails</a>
+        </li>
+    {% endif %}
+{% endfor %}
+
+{# Ensuite, afficher les musées sans tickets disponibles #}
+{% for musee in musees %}
+    {% if musee.nbrTicketsDisponibles == 0 %}
+        <li class="museum-item">
+            <h3 class="museum-name">Le musée de {{ musee.nomMusee }}</h3>
+            <img src="{{ asset(musee.imageMusee) }}" width='100%' />
+            <p>Situé à {{ musee.ville }}</p>
+            <span class="details-disabled">Pas de tickets disponibles</span>
+        </li>
+    {% endif %}
+{% endfor %}
+    </ul>
+</section>
+			<footer class="footer-area section-gap">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-5 col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h6>About Us</h6>
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.
+								</p>
+								<p class="footer-text">
+									<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> and distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								</p>
+							</div>
+						</div>
+						<div class="col-lg-5  col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h6>Newsletter</h6>
+								<p>Stay update with our latest</p>
+								<div class="" id="mc_embed_signup">
+									<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
+										<input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
+			                            	<button class="click-btn btn btn-default"><span class="lnr lnr-arrow-right"></span></button>
+			                            	<div style="position: absolute; left: -5000px;">
+												<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+											</div>
+
+										<div class="info"></div>
+									</form>
+								</div>
+							</div>
+						</div>						
+						<div class="col-lg-2 col-md-6 col-sm-6 social-widget">
+							<div class="single-footer-widget">
+								<h6>Follow Us</h6>
+								<p>Let us be social</p>
+								<div class="footer-social d-flex align-items-center">
+									<a href="#"><i class="fa fa-facebook"></i></a>
+									<a href="#"><i class="fa fa-twitter"></i></a>
+									<a href="#"><i class="fa fa-dribbble"></i></a>
+									<a href="#"><i class="fa fa-behance"></i></a>
+								</div>
+							</div>
+						</div>							
+					</div>
+				</div>
+			</footer>	
+			<!-- End footer Area -->		
+
+			<script src="js/vendor/jquery-2.2.4.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+			<script src="js/vendor/bootstrap.min.js"></script>			
+			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+  			<script src="js/easing.min.js"></script>			
+			<script src="js/hoverIntent.js"></script>
+			<script src="js/superfish.min.js"></script>	
+			<script src="js/jquery.ajaxchimp.min.js"></script>
+			<script src="js/jquery.magnific-popup.min.js"></script>	
+			<script src="js/owl.carousel.min.js"></script>	
+			<script src="js/imagesloaded.pkgd.min.js"></script>
+			<script src="js/justified.min.js"></script>					
+			<script src="js/jquery.sticky.js"></script>
+			<script src="js/jquery.nice-select.min.js"></script>			
+			<script src="js/parallax.min.js"></script>		
+			<script src="js/mail-script.js"></script>	
+			<script src="js/main.js"></script>	
+
+            
+{% endblock %}</html>

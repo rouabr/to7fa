@@ -1,0 +1,273 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Musées!{% endblock %}</title>
+		<link rel="icon" type="image/png" href="{{ asset('/photos/to7fa-removebg-preview.png') }}">		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-o2FWgrFXkGzeQrjtJgAMjPO7z5FJmP1PQtXtlx0bTVazlMLf1FQwliSxLtkhC8xlCkdy9ag+YHdntqC6V/ebUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-o2FWgrFXkGzeQrjtJgAMjPO7z5FJmP1PQtXtlx0bTVazlMLf1FQwliSxLtkhC8xlCkdy9ag+YHdntqC6V/ebUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+{% block stylesheets %}
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-o2FWgrFXkGzeQrjtJgAMjPO7z5FJmP1PQtXtlx0bTVazlMLf1FQwliSxLtkhC8xlCkdy9ag+YHdntqC6V/ebUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="{{ asset('assets/css/linearicons.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/magnific-popup.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/nice-select.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/owl.carousel.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+<style>
+/* Your additional CSS styles here */
+.btn-custom {
+    background-color: #8B4513; /* Couleur marron */
+    color: #fff; /* Texte en blanc */
+    padding: 10px 50px; /* Ajout de rembourrage pour une taille plus grande */
+    border: none; /* Suppression de la bordure */
+    border-radius: 5px; /* Coins arrondis */
+    font-size: 16px; /* Taille de la police */
+    cursor: pointer; /* Curseur pointer */
+    transition: background-color 0.3s ease; /* Transition douce pour le changement de couleur au survol */
+}
+
+.btn-custom:hover {
+    background-color: #654321; /* Couleur marron foncé au survol */
+}
+.image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Noir transparent */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-container:hover .image-overlay {
+    opacity: 1; /* Affiche l'obscurcissement au survol */
+    cursor: pointer; /* Curseur pointer au survol */
+}
+
+.zoom-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff; /* Couleur de l'icône */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-container:hover .zoom-icon {
+    opacity: 1; /* Affiche l'icône au survol */
+}
+
+</style>
+{% endblock %}
+
+      
+         
+    </head>
+{% block body %}
+   
+          <header id="header" id="home">
+			  	<div class="container header-top">
+			  		<div class="row">
+				  		<div class="col-6 top-head-left">
+				  			<ul>
+				  				<li><a href="#">Visit Us</a></li>
+				  				<li><a href="#">Buy Ticket</a></li>
+				  			</ul>
+				  		</div>
+				  		<div class="col-6 top-head-right">
+				  			<ul>
+		  						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-behance"></i></a></li>
+				  			</ul>
+				  		</div>			  			
+			  		</div>
+			  	</div>
+			  	<hr>
+<div class="container">
+    <div class="row align-items-center justify-content-between">
+        <div class="col-auto">
+          <div class="col-auto align-items-center">
+    <a href="index.html"><img src="/photos/to7fa-removebg-preview.png" alt="" title="" width="80" height="80" /></a>
+    <h1 class="text-white" style="font-size: 24px; margin-left: 10px;">TO7FA</h1>
+</div>
+        </div>
+        <div class="col-auto">
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li class="menu-active"><a href="{{ path('app_home') }}">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li class="menu-active"><a href="{{ path('app_musee_frontoffice') }}">Museums</a></li>
+                    <li><a href="event.html">Events</a></li>
+                    <li><a href="ticket.html">Ticket</a></li>
+                    <li><a href="blog-home.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="menu-has-children"><a href="">Pages</a>
+                        <ul>
+                            <li><a href="blog-single.html">Blog Single</a></li>
+                            <li><a href="category.html">Category</a></li>
+                            <li><a href="elements.html">Elements</a></li>
+                        </ul>
+                    </li>			          
+                </ul>
+            </nav><!-- #nav-menu-container -->
+        </div>
+    </div>
+	</div>
+</div>
+			  </header><!-- #header -->
+
+
+			<!-- start banner Area -->
+			<section class="banner-area relative" id="home">	
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row d-flex align-items-center justify-content-center">
+						<div class="about-content col-lg-12">
+							<h1 class="text-white">
+								Nos Musées			
+							</h1>	
+							<p class="text-white link-nav"><a href="{{ path('app_musee_frontoffice') }}"> Museums</a>  <span class="lnr lnr-arrow-right"></span>  <a href="{{ path('app_musee_frontoffice') }}"> Museums</a></p>
+						</div>											
+					</div>
+				</div>
+			</section>
+
+<section class="gallery-area section-gap gallery-page-area align-items-center">
+ <div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                
+                <p>Musée de {{ musee.nomMusee }}</p>
+            </div>
+            <div class="mb-3">
+                <strong>Adresse:</strong>
+                <p>{{ musee.adresse }}</p>
+            </div>
+            <div class="mb-3">
+                <strong>Ville:</strong>
+                <p>{{ musee.ville }}</p>
+            </div>
+            <div class="mb-3">
+                <strong>Les tickets disponibles:</strong>
+                <p>{{ musee.nbrTicketsDisponibles}}</p>
+            </div>
+            <div class="mb-3">
+                <strong>Description</strong>
+<hr style="border-top: 1px solid #ccc; margin-top: 20px; margin-bottom: 20px;">
+                <p>{{ musee.description }}</p>
+            </div>
+            <hr style="background-color: white;">
+                        <hr style="background-color: white;">
+
+            <hr style="background-color: white;">
+            <hr style="background-color: white;">
+            <hr style="background-color: white;">
+            <hr style="background-color: white;">
+            <hr style="background-color: white;">
+
+         
+                        <a href="/reservation/musee/new/{{ musee.getIdMusee() }}"><button class="btn btn-custom">Reserver</button></a>
+
+        </div>
+       <div class="col-md-6">
+    <div class="mb-3">
+        <div class="image-container">
+            <img src="{{ asset(musee.imageMusee) }}" class="img-fluid" alt="Image du musée" id="museum-image">
+            <div class="image-overlay"></div>
+            <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+</section>
+			<footer class="footer-area section-gap">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-5 col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h6>About Us</h6>
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua.
+								</p>
+								<p class="footer-text">
+									<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> and distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								</p>
+							</div>
+						</div>
+						<div class="col-lg-5  col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h6>Newsletter</h6>
+								<p>Stay update with our latest</p>
+								<div class="" id="mc_embed_signup">
+									<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
+										<input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
+			                            	<button class="click-btn btn btn-default"><span class="lnr lnr-arrow-right"></span></button>
+			                            	<div style="position: absolute; left: -5000px;">
+												<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+											</div>
+
+										<div class="info"></div>
+									</form>
+								</div>
+							</div>
+						</div>						
+						<div class="col-lg-2 col-md-6 col-sm-6 social-widget">
+							<div class="single-footer-widget">
+								<h6>Follow Us</h6>
+								<p>Let us be social</p>
+								<div class="footer-social d-flex align-items-center">
+									<a href="#"><i class="fa fa-facebook"></i></a>
+									<a href="#"><i class="fa fa-twitter"></i></a>
+									<a href="#"><i class="fa fa-dribbble"></i></a>
+									<a href="#"><i class="fa fa-behance"></i></a>
+								</div>
+							</div>
+						</div>							
+					</div>
+				</div>
+			</footer>	
+			<!-- End footer Area -->	
+  <script>document.addEventListener('DOMContentLoaded', function () {
+    const image = document.getElementById('museum-image');
+    const imageContainer = document.querySelector('.image-container');
+
+    imageContainer.addEventListener('click', function () {
+        image.classList.toggle('zoomed-image');
+    });
+});</script>
+{% endblock %}
+       {% block javascripts %}
+        <script src="{{ asset('assets/js/vendor/jquery-2.2.4.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="{{ asset('assets/js/vendor/bootstrap.min.js') }}"></script>           
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+        <script src="{{ asset('assets/js/easing.min.js') }}"></script>            
+        <script src="{{ asset('assets/js/hoverIntent.js') }}"></script>
+        <script src="{{ asset('assets/js/superfish.min.js') }}"></script>   
+        <script src="{{ asset('assets/js/jquery.ajaxchimp.min.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>    
+        <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>   
+        <script src="{{ asset('assets/js/imagesloaded.pkgd.min.js') }}"></script>
+        <script src="{{ asset('assets/js/justified.min.js') }}"></script>                    
+        <script src="{{ asset('assets/js/jquery.sticky.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.nice-select.min.js') }}"></script>          
+        <script src="{{ asset('assets/js/parallax.min.js') }}"></script>       
+        <script src="{{ asset('assets/js/mail-script.js') }}"></script>    
+        <script src="{{ asset('assets/js/main.js') }}"></script> 
+      
+        {% endblock %}

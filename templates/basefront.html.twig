@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Musées!{% endblock %}</title>
+		<link rel="icon" type="image/png" href="{{ asset('/photos/to7fa-removebg-preview.png') }}">		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-o2FWgrFXkGzeQrjtJgAMjPO7z5FJmP1PQtXtlx0bTVazlMLf1FQwliSxLtkhC8xlCkdy9ag+YHdntqC6V/ebUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-o2FWgrFXkGzeQrjtJgAMjPO7z5FJmP1PQtXtlx0bTVazlMLf1FQwliSxLtkhC8xlCkdy9ag+YHdntqC6V/ebUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+{% block stylesheets %}
+<link href="{{ asset('assets/css/linearicons.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/magnific-popup.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/nice-select.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/owl.carousel.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+<style>
+/* Your additional CSS styles here */
+
+.museum-item {
+    display: inline-block;
+    margin: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: calc(30% - 50px); /* Pour afficher 5 musées par ligne */
+    box-sizing: border-box;
+    vertical-align: top;
+	text-align: center;
+}
+
+
+.museum-list {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    list-style: none;
+}
+.getstarted {
+     color: white;
+    background-color: brown;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: 2px solid brown;
+    border-radius: 5px;
+    display: inline-block;
+    transition: color 0.3s ease, border-color 0.3s ease;
+	width: 300;
+}
+
+.getstarted:hover {
+	background-color: transparent;
+    color: brown;
+   
+}
+
+</style>
+{% endblock %}
+
+           
+         
+    </head>
+{% block body %}
+   
+      
+
+            
+{% endblock %}
+  {% block javascripts %}
+        <script src="{{ asset('assets/js/vendor/jquery-2.2.4.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="{{ asset('assets/js/vendor/bootstrap.min.js') }}"></script>           
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+        <script src="{{ asset('assets/js/easing.min.js') }}"></script>            
+        <script src="{{ asset('assets/js/hoverIntent.js') }}"></script>
+        <script src="{{ asset('assets/js/superfish.min.js') }}"></script>   
+        <script src="{{ asset('assets/js/jquery.ajaxchimp.min.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>    
+        <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>   
+        <script src="{{ asset('assets/js/imagesloaded.pkgd.min.js') }}"></script>
+        <script src="{{ asset('assets/js/justified.min.js') }}"></script>                    
+        <script src="{{ asset('assets/js/jquery.sticky.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.nice-select.min.js') }}"></script>          
+        <script src="{{ asset('assets/js/parallax.min.js') }}"></script>       
+        <script src="{{ asset('assets/js/mail-script.js') }}"></script>    
+        <script src="{{ asset('assets/js/main.js') }}"></script> 
+        {% endblock %}

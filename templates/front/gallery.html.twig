@@ -1,0 +1,109 @@
+
+{% extends '/front/base.html.twig' %}
+
+{% block body %}
+			<!-- start banner Area -->
+			<section class="banner-area relative" id="home">	
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row d-flex align-items-center justify-content-center">
+						<div class="about-content col-lg-12">
+							<h1 class="text-white">
+								Art Gallery				
+							</h1>	
+							<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="gallery.html"> Gallery</a></p>
+						</div>											
+					</div>
+				</div>
+			</section>
+			<!-- End banner Area -->	
+
+
+			<!-- Start gallery Area -->
+			<section class="gallery-area section-gap gallery-page-area" id="gallery">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							<div class="title text-center">
+								<h1 class="mb-10">Our Exhibition Gallery</h1>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua.</p>
+							</div>
+						</div>
+					</div>						
+					<div id="grid-container" class="row">
+{% for oeuvre in oeuvres %}
+    {% if oeuvre is not null %}
+        <div class="gallery-item">
+            <img class="grid-item" src="{{ asset(oeuvre.getLienimg()) }}">
+            <div class="gallery-info">
+                <h3>{{ oeuvre.getTitre() }}</h3>
+                <p>Price: ${{ oeuvre.getPrix() }}</p>
+                <!-- Delete button -->
+                <form id="addToCartForm" action="{{ path('add_to_cart', {'id': oeuvre.getIdOeuvre()}) }}" method="POST">
+                    <div class="form-group">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                </form>
+                <p></p>
+                <form id="addCommandeForm" action="{{ path('app_commande_new_shop', {'idOeuvre':  oeuvre.getIdOeuvre()}) }}" method="post">
+                    <!-- Add hidden inputs to pass data to the command form -->
+                    <input type="hidden" name="oeuvre_name" value="{{ oeuvre.getTitre() }}">
+                    <input type="hidden" name="oeuvre_price" value="{{ oeuvre.getPrix() }}">
+					
+					 <input type="hidden" name="quantity" value="1" id="quantity_hidden">
+                    <!-- You can add more hidden inputs for other necessary data -->
+                    <button onclick="checkOrder()" type="submit" class="btn btn-sm btn-primary">Add Commande</button>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+
+
+
+
+</div>	
+				</div>	
+			</section>
+			<!-- End gallery Area -->			
+		
+			<!-- End blog Area -->
+			<script>
+    document.getElementById('quantity').addEventListener('change', function() {
+        document.getElementById('hidden-quantity').value = this.value;
+    });
+
+	
+<script>
+     function updateCommandForm(formId) {
+        // Get the quantity value from the corresponding form
+        var quantity = document.getElementById(formId).querySelector('[name="quantity"]').value;
+        // Set the quantity value to the hidden input field in the corresponding form
+        document.getElementById(formId).querySelector('[name="quantity_hidden"]').value = quantity;
+        // Submit the corresponding form
+        document.getElementById(formId).submit();
+    }
+</script>
+	
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+   function checkOrder() {
+        // Display an alert for checking orders
+        alert("Order checked successfully!");
+    }
+
+    $(document).ready(function() {
+        $('#quantity').on('input', function() {
+            $('#quantity_hidden').val($(this).val());
+        });
+    });
+</script>
+
+
+
+
+{% endblock  %}

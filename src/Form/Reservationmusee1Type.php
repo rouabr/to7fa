@@ -25,6 +25,7 @@ class Reservationmusee1Type extends AbstractType
     {
         $builder
         ->add('dateReservation', DateType::class, [
+            'label' => 'Date de réservation',
             'attr' => [
                 'class' => 'form-control date-reservation',
                 

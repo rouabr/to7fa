@@ -30,7 +30,7 @@ class Musee
          *
          * @ORM\Column(name="nom_musee", type="string", length=255, nullable=false)
          * @Assert\NotBlank(message="Le nom du musée ne peut pas être vide")
-         * @Assert\Length(max=5, maxMessage="Le nom du musée ne peut pas dépasser {{ limit }} caractères")
+         * @Assert\Length(max=24, maxMessage="Le nom du musée ne peut pas dépasser 24 caractères")
          */
         private $nomMusee;
     
@@ -39,7 +39,7 @@ class Musee
          *
          * @ORM\Column(name="adresse", type="string", length=255, nullable=false)
          * @Assert\NotBlank(message="L'adresse ne peut pas être vide")
-         * @Assert\Length(max=255, maxMessage="L'adresse ne peut pas dépasser {{ limit }} caractères")
+         * @Assert\Length(max=255, maxMessage="L'adresse ne peut pas dépasser 255 caractères")
          */
         private $adresse;
     
@@ -48,7 +48,7 @@ class Musee
          *
          * @ORM\Column(name="ville", type="string", length=255, nullable=false)
          * @Assert\NotBlank(message="La ville ne peut pas être vide")
-         * @Assert\Length(max=255, maxMessage="La ville ne peut pas dépasser {{ limit }} caractères")
+         * @Assert\Length(max=255, maxMessage="La ville ne peut pas dépasser 255 caractères")
          */
         private $ville;
     
@@ -67,7 +67,7 @@ private $nbrTicketsDisponibles;
  *
  * @ORM\Column(name="description", type="string", length=255, nullable=false)
  * @Assert\NotBlank(message="La description ne peut pas être vide")
- * @Assert\Length(max=255, maxMessage="La description ne peut pas dépasser {{ 50 }} caractères")
+ * @Assert\Length(max=255, maxMessage="La description ne peut pas dépasser 255 caractères")
  * @Assert\Regex(
  *      pattern="/\d/",
  *      match=false,
@@ -82,6 +82,19 @@ private $nbrTicketsDisponibles;
          * @ORM\Column(name="image_musee", type="string", length=255, nullable=false)
          */
         private $imageMusee;
+            /**
+     * @var float
+     *
+     * @ORM\Column(name="lat", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $lat;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="lon", type="float", precision=10, scale=0, nullable=false)
+     */
+    private $lon;
 
     public function getIdMusee(): ?int
     {
@@ -156,6 +169,29 @@ private $nbrTicketsDisponibles;
     public function setImageMusee(string $imageMusee): static
     {
         $this->imageMusee = $imageMusee;
+
+        return $this;
+    }
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(float $lat): static
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLon(): ?float
+    {
+        return $this->lon;
+    }
+
+    public function setLon(float $lon): static
+    {
+        $this->lon = $lon;
 
         return $this;
     }

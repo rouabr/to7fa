@@ -8,5 +8,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class TicketsDisponibles extends Constraint
 {
-    public $message = 'Le nombre de tickets réservés dépasse le nombre de tickets disponibles dans le musée.';
+    public $message = 'Le nombre de tickets réservés dépasse le nombre de tickets disponibles dans le musée!';
 }

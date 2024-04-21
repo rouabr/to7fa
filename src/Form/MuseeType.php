@@ -86,7 +86,9 @@ class MuseeType extends AbstractType
                     ])
                 ],
                 'attr' => ['class' => 'form-control-file']
-            ]);
+            ])
+            ->add('lat')  // Ne pas inclure ces champs dans le formulaire
+            ->add('lon');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

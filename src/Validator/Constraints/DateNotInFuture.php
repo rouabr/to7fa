@@ -8,5 +8,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class DateNotInFuture extends Constraint
 {
-    public $message = 'La date de réservation ne peut pas être inferieur à celle d\'aujourd\'hui.';
+    public $message = 'La date de réservation ne peut pas être inferieur à celle d\'aujourd\'hui!';
 }

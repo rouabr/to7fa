@@ -37,6 +37,16 @@ class MuseeController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $musee = new Musee();
+        $latitude = $request->query->get('latitude');
+        $longitude = $request->query->get('longitude');
+    
+        // Assurez-vous que les valeurs sont bien des nombres décimaux
+        $latitude = floatval($latitude);
+        $longitude = floatval($longitude);
+    
+        // Affecter les valeurs à l'entité Musee
+        $musee->setLat($latitude);
+        $musee->setLon($longitude);
         $form = $this->createForm(MuseeType::class, $musee);
         $form->handleRequest($request);
 

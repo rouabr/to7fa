@@ -1,0 +1,67 @@
+{% extends '/front/base.html.twig' %}
+
+{% block body %}
+
+			<!-- start banner Area -->
+			<section class="banner-area relative" id="home">	
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row d-flex align-items-center justify-content-center">
+						<div class="about-content col-lg-12">
+							<h1 class="text-white">
+								CHeck Order
+							</h1>	
+							<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="ticket.html"> Panier</a></p>
+						</div>											
+					</div>
+				</div>
+			</section>
+			<!-- Form Basic -->
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="m-0">Commande Summary</h4>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted mb-4">Oeuvre Name: {{ oeuvre.getTitre() }}</p>
+                    <p class="text-muted mb-4">Oeuvre Price: {{ oeuvre.getPrix() }} $</p>
+                    <p class="text-muted mb-4">Quantity: {{ quantity }}</p>
+                     {% set totalPriceBeforeDiscount = oeuvre.getPrix() * quantity %}
+                    {% if (discount > 0) %} 
+{% set totalPriceAfterDiscount = totalPriceBeforeDiscount * (1 - discount) %}
+                    <p class="text-muted mb-4">Totale Price:(Before Discount): {{ oeuvre.getPrix() * quantity }} $</p>
+                    <p>Discounted Price: {{ totalPriceAfterDiscount}} $</p>
+                       <p style=" color: #810f12;">You receive a discount 10% because you are a loyal customer and have made multiple purchases. Thank you for your loyalty!</p>
+                       {% else %}
+                       {% set totalPriceAfterDiscount = totalPriceBeforeDiscount %}
+                         <p class="text-muted mb-4">Totale Price: {{ totalPriceAfterDiscount }} $</p>
+{% endif %}
+                  
+                
+   
+                        <!-- Add more form fields as needed -->
+                        <form  action="{{ path('app_commande_To_shop', {'idOeuvre': oeuvre.getIdOeuvre(),'quantity': quantity,'total': totalPriceAfterDiscount}) }}" method="POST">
+            <button onclick="checkOrder()" type="submit" class="btn btn-primary" style="background-color: #810f12; color: #fff;">Check Orders</button>
+        </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+	<script>
+ 
+ 
+</script>
+
+			
+
+
+{% endblock  %}

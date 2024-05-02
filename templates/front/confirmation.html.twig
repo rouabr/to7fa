@@ -1,0 +1,88 @@
+{% extends '/front/base.html.twig' %}
+
+{% block body %}
+
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <!-- Include your CSS and JS libraries for styling and validation -->
+    <!-- For testing, you can use libraries like Bootstrap for styling and jQuery for validation -->
+
+
+
+    <!-- start banner Area -->
+    <section class="banner-area relative" id="home">    
+        <div class="overlay overlay-bg"></div>
+        <div class="container">
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="about-content col-lg-12">
+                    <h1 class="text-white">
+                        My Commandes           
+                    </h1>    
+                    <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="gallery.html"> Gallery</a></p>
+                </div>                                          
+            </div>
+        </div>
+    </section>
+
+ <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        Payment Details
+                    </div>
+                    <div class="card-body">
+                     <form action="{{ path('app_confirm', {'total': total }) }}" method="post">
+
+                            <div class="form-group">
+                                <label for="cardNumber">Card Number</label>
+                                 <input type="text" class="form-control" id="paymentCode" name="cardNumber" placeholder="Enter card number"  autocomplete="off" >      
+                                 <small id="paymentCodeHelp" class="form-text text-muted" style="display: none; color: red !important;">Payment code must be exactly 12 characters long.</small>                       
+                            </div>
+                            <div class="form-group">
+                                <label for="expiryDate">Expiry Date</label>
+                                <input type="text" class="form-control" id="expiryDate" name="expiryDate" placeholder="MM/YY" >
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Enter CVV" >
+                            </div>
+                            <button onclick="checkOrder()" type="submit"   style="background-color: #8B0000; border-color: #8B0000; color: #fff;" class="btn btn-primary">Submit Payment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <script>
+ 
+     function checkOrder() {
+      var paymentCode = document.getElementById('paymentCode').value.trim();
+      var helpText = document.getElementById('paymentCodeHelp');
+        // Check if payment code is exactly 8 characters long
+        if (paymentCode.length !== 12) {
+              helpText.style.display = 'block';
+             event.preventDefault();
+        }
+        else {
+        // If validation passes, submit the form
+        document.getElementById('paymentForm').submit();
+     
+        }
+    }
+       document.getElementById("expiryDate").addEventListener("input", function(event) {
+        var input = event.target.value;
+        var isValid = /^\d{2}\/\d{2}$/.test(input);
+        if (!isValid) {
+            event.target.setCustomValidity("Expiry date must be in the format MM/YY");
+        } else {
+            event.target.setCustomValidity("");
+        }
+    });
+</script>
+
+
+
+{% endblock %}

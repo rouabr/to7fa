@@ -1,0 +1,78 @@
+{% extends '/front/base.html.twig' %}
+
+{% block body %}
+
+			<!-- start banner Area -->
+			<section class="banner-area relative" id="home">	
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row d-flex align-items-center justify-content-center">
+						<div class="about-content col-lg-12">
+							<h1 class="text-white">
+								CHeck Order
+							</h1>	
+							<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="ticket.html"> Panier</a></p>
+						</div>											
+					</div>
+				</div>
+			</section>
+			<!-- Form Basic -->
+ <div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="m-0">Commande Summary</h4>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted mb-4">Number of Oeuvre: {{ quantity }}</p>
+                    {% set totalPriceBeforeDiscount = total * quantity %}
+                    {% if (discount > 0) %} 
+                        {% set totalPriceAfterDiscount = totalPriceBeforeDiscount * (1 - discount) %}
+                        <p class="text-muted mb-4">Total Price (Before Discount): {{ total * quantity }} $</p>
+                        <p>Discounted Price: {{ totalPriceAfterDiscount }} $</p>
+                        <p style="color: #810f12;">You receive a 10% discount because you are a loyal customer and have made multiple purchases. Thank you for your loyalty!</p>
+                    {% else %}
+                        {% set totalPriceAfterDiscount = totalPriceBeforeDiscount %}
+                        <p class="text-muted mb-4">Total Price: {{ totalPriceAfterDiscount }} $</p>
+                    {% endif %}
+                  
+                    <!-- Add more form fields as needed -->
+                    <form id="paymentForm" action="{{ path('app_allcommande_To_shop',{'total':  totalPriceAfterDiscount}) }}" method="POST">
+                        <div class="form-group text-center"> <!-- Added text-center class here -->
+                            <button onclick="checkOrder()" type="submit" class="btn btn-primary" style="background-color: #810f12; color: #fff;">Check Orders</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+	<script>
+   
+ 
+       function checkOrder() {
+      var paymentCode = document.getElementById('paymentCode').value.trim();
+      var helpText = document.getElementById('paymentCodeHelp');
+        // Check if payment code is exactly 8 characters long
+        if (paymentCode.length !== 8) {
+              helpText.style.display = 'block';
+             event.preventDefault();
+        }
+        else {
+        // If validation passes, submit the form
+        document.getElementById('paymentForm').submit();
+     
+        }
+    }
+</script>
+
+			
+
+
+{% endblock  %}

@@ -1,0 +1,62 @@
+{% extends '/dashboard/base.html.twig' %}
+
+{% block body %}
+
+        <!-- Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Form Basics</h1>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="./">Home</a></li>
+              <li class="breadcrumb-item">Forms</li>
+              <li class="breadcrumb-item active" aria-current="page">Form Basics</li>
+            </ol>
+          </div>
+
+         
+              <!-- Form Basic -->
+              <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary" style="color: #58080a !important;">Update Commande</h6>
+                </div>
+                <div class="card-body">
+        {{ form_start(form3, {'action': path('app_commande_edit', {'idCommande': commande.idCommande})}) }}
+<div class="form-group">
+    {{ form_label(form3.nameCommande) }}
+    {{ form_widget(form3.nameCommande, {'attr': {'class': 'form-control'}}) }}
+</div>
+<div class="form-group"> 
+
+    {{ form_label(form3.date_commande) }}
+    {{ form_widget(form3.date_commande, {'attr': {'class': 'form-control'}}) }}
+</div>
+<div class="form-group">
+    {{ form_label(form3.prixCommande) }}
+    {{ form_widget(form3.prixCommande, {'attr': {'class': 'form-control'}}) }}
+</div>
+<div class="form-group">
+    {{ form_label(form3.paiement) }}
+    {{ form_widget(form3.paiement, {'attr': {'class': 'form-control'}}) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form3.id_oeuvre) }}
+    {{ form_widget(form3.id_oeuvre, {'attr': {'class': 'form-control'}}) }}
+</div>
+ <button type="submit" class="btn btn-primary" style="background-color: #8B0000; border-color: #8B0000; color: #fff;" >Update</button>
+
+
+
+{{ form_end(form3) }}
+                </div>
+
+           
+
+          
+
+  
+            
+
+
+
+{% endblock  %}

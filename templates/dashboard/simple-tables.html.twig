@@ -1,0 +1,152 @@
+{% extends '/dashboard/base.html.twig' %}
+
+{% block body %}
+
+
+        <!-- Topbar -->
+        <!-- Container Fluid-->
+       
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Simple Tables</h1>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="./">Home</a></li>
+              <li class="breadcrumb-item">Tables</li>
+              <li class="breadcrumb-item active" aria-current="page">Simple Tables</li>
+            </ol>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12 mb-4">
+              <!-- Simple Tables -->
+              <div class="card">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                 <h6 class="m-0 font-weight-bold text-primary" style="color: #58080a !important;">Panier</h6>
+                </div>
+                <div class="table-responsive">
+                  <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Panier ID</th>
+                        <th>Name Oeuvre</th>
+                        <th>Name user</th>
+                        <th>Quantity</th>
+                        <th>Action</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     {% for item in data %}
+                      <tr>
+                        <td><a href="#" style="color: #58080a !important;">{{ item.getIdPanier }}</a></td>
+                        <td>{{ item.getIdOeuvre().getTitre() }}</td>
+                        <td>{{ item.getIdUser().getUserName() }}</td>
+                        <td>{{ item.getQuantity() }}</td>
+                       
+                       <td>  <form action="{{ path('app_panier_delete', {'idPanier': item.getIdPanier()}) }}" method="post">
+                        <button type="submit" class="btn btn-sm btn-primary" style="background-color: #8B0000; border-color: #8B0000; color: #fff;">Delete</button>
+                    </form></td>
+                    <td>  <form action="{{ path('app_panier_edit', {'idPanier': item.getIdPanier()}) }}" method="post">
+                        <button type="submit" class="btn btn-sm btn-primary" style="background-color: #b36f70; border-color: #b36f70; color: #fff;">Update</button>
+                    </form></td>
+
+                       
+                      </tr>
+                   {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+                <div class="card-footer"></div>
+              </div>
+            </div>
+          </div>
+          <!--Row-->
+
+     <div class="row">
+            <div class="col-lg-12 mb-4">
+              <!-- Simple Tables -->
+              <div class="card">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary" style="color: #58080a !important;">Commande</h6>
+                </div>
+                <div class="table-responsive">
+                  <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>Commande ID</th>
+                        <th>Name </th>
+                        <th>Date </th>
+                        <th>Price </th>
+                        <th>Paiment</th>
+                        <th>Name  Oeuvre</th>
+                         <th>Name User</th>
+                        <th>Qunatity</th>
+                        <th>Action</th>
+                         <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     {% for item in data_commande %}
+                      <tr>
+                        <td><a href="#" style="color: #58080a !important;">{{ item.getIdCommande() }}</a></td>
+                        <td>{{ item.getNameCommande() }}</td>
+                      <td>{{ item.getDateCommande()|date('Y-m-d H:i:s') }}</td>
+                        <td>{{ item.getPrixCommande() }}</td>
+                         <td>{{ item.getPaiement() }}</td>
+                        <td>{{ item.getIdOeuvre().getTitre() }}</td>
+                         <td>{{ item.getIdUser().getUserName() }}</td>
+
+                        <td>{{ item.getQuantity() }}</td>
+                       
+                       <td>  <form action="{{ path('app_commande_delete', {'idommande': item.getIdCommande()}) }}" method="post">
+                        <button type="submit" class="btn btn-sm btn-primary " style="background-color: #8B0000; border-color: #8B0000; color: #fff;">Delete</button>
+                    </form> </td>
+                     <td>  <form action="{{ path('app_commande_edit', {'idCommande': item.getIdCommande()}) }}" method="post">
+                        <button type="submit" class="btn btn-sm btn-primary"  style="background-color: #b36f70; border-color: #b36f70; color: #fff;">Update</button>
+                    </form> </td>
+                   
+                   
+
+                       
+                      </tr>
+                   {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+                <div class="card-footer"></div>
+              </div>
+            </div>
+          </div>
+          <!--Row-->
+
+
+          <!-- Modal Logout -->
+          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to logout?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                  <a href="login.html" class="btn btn-primary">Logout</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!---Container Fluid-->
+      </div>
+     
+    </div>
+  </div>
+
+
+{% endblock  %}

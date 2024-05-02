@@ -1,0 +1,35 @@
+{% extends '/front/base.html.twig' %}
+
+{% block body %}
+    <!-- start banner Area -->
+    <section class="banner-area relative" id="home">    
+        <div class="overlay overlay-bg"></div>
+        <div class="container">
+            <div class="row d-flex align-items-center justify-content-center">
+                <div class="about-content col-lg-12">
+                    <h1 class="text-white">
+                        My Commandes           
+                    </h1>    
+                    <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="gallery.html"> Commandes</a></p>
+                </div>                                          
+            </div>
+        </div>
+    </section>
+
+    <!-- Display QR Code Section -->
+<!-- Display QR Code Section -->
+<section class="qr-code-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+			<p></p>
+                <!-- Display the QR code using the img tag and the provided URL -->
+                <img src="{{ qrCodeUrl }}" alt="QR Code" class="img-fluid">
+						<p></p>
+                <p  style="color: #810f12;">Scan QR Code to view your orders</p>
+               
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

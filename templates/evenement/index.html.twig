@@ -1,0 +1,172 @@
+{% extends './dashboard/base.html.twig' %}
+
+{% block title %}Evenement index{% endblock %}
+
+{% block body %}
+    <h1>Evenement index</h1>
+
+    <!-- EvenementType Form with Search Input -->
+    {{ form_start(searchForm, {'attr': {'id': 'evenementForm'}}) }}
+        {{ form_row(searchForm.searchTerm, {'attr': {'id': 'searchInput', 'placeholder': 'Search...'}}) }}
+        <button type="submit">Search</button>
+    {{ form_end(searchForm) }}
+
+    <!-- Search Results -->
+    <div id="searchResults">
+    <table class="table" id="eventTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">IdEvent</th>
+                <th onclick="sortTable(1)">NomEvent</th>
+                <th onclick="sortTable(2)">DescriptionEvent</th>
+                <th onclick="sortTable(3)">LieuEvent</th>
+                <th onclick="sortTable(4)">TypeEvent</th>
+                <th onclick="sortTable(5)">DatedebutEvent</th>
+                <th onclick="sortTable(6)">DatefinEvent</th>
+                <th onclick="sortTable(7)">CapaciteEvent</th>
+                <th onclick="sortTable(8)">ImageEvent</th>
+                <th onclick="sortTable(9)">PrixEvent</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evenement in evenements %}
+            <tr>
+                <td>{{ evenement.idEvent }}</td>
+                <td>{{ evenement.nomEvent }}</td>
+                <td>{{ evenement.descriptionEvent }}</td>
+                <td>{{ evenement.lieuEvent }}</td>
+                <td>{{ evenement.typeEvent }}</td>
+                <td>{{ evenement.datedebutEvent|date('Y-m-d') }}</td>
+                <td>{{ evenement.datefinEvent|date('Y-m-d') }}</td>
+                <td>{{ evenement.capaciteEvent }}</td>
+                <td><img style="height:80px; width:80px" src="/uploads/evenements/{{ evenement.imageEvent }}"</td>
+                <td>{{ evenement.prixEvent }}</td>
+                <td>
+                    <a href="{{ path('app_evenement_show', {'id': evenement.idEvent}) }}">show</a>
+                    <a href="{{ path('app_evenement_edit', {'idEvent': evenement.idEvent}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("eventTable");
+        switching = true;
+        dir = "asc"; // Set the sorting direction to ascending
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("td")[n];
+                y = rows[i + 1].getElementsByTagName("td")[n];
+                if (dir === "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch= true;
+                        break;
+                    }
+                } else if (dir === "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch= true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount ++;
+            } else {
+                if (switchcount === 0 && dir === "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+
+        // Clear all column header colors
+        var headers = table.getElementsByTagName("th");
+        for (i = 0; i < headers.length; i++) {
+            headers[i].style.backgroundColor = "";
+        }
+
+        // Set the color of the sorted column header
+        table.rows[0].getElementsByTagName("th")[n].style.backgroundColor = "lightblue";
+    }
+</script>
+
+    <a href="{{ path('app_evenement_new') }}">Create new</a>
+
+    <!-- Include jQuery and AJAX JavaScript -->
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Event delegation for dynamically added elements
+            $('#searchResults').on('click', 'a.show-link', function(event) {
+                event.preventDefault();
+                var url = $(this).attr('href');
+                // Perform any action needed for 'show' link
+            });
+
+            $('#searchResults').on('click', 'a.edit-link', function(event) {
+                event.preventDefault();
+                var url = $(this).attr('href');
+                // Perform any action needed for 'edit' link
+            });
+
+            $('#searchInput').on('input', function() {
+                var searchTerm = $(this).val();
+
+                // Obtain CSRF token from the search form
+                var csrfToken = $('input[name="_token"]').val();
+
+                $.ajax({
+                    url: '{{ path("app_evenement_search") }}',
+                    type: 'POST',
+                    data: {
+                        searchTerm: searchTerm,
+                        _token: csrfToken // Include CSRF token in the AJAX request
+                    },
+                    success: function(response) {
+                        var evenements = response.evenements;
+                        var resultsTable = $('#searchResults table tbody');
+                        resultsTable.empty();
+
+                    evenements.forEach(function(evenement) {
+                        var row = '<tr>' +
+                            '<td>' + evenement.idEvent + '</td>' +
+                            '<td>' + evenement.nomEvent + '</td>' +
+                            '<td>' + evenement.descriptionEvent + '</td>' +
+                            '<td>' + evenement.lieuEvent + '</td>' +
+                            '<td>' + evenement.typeEvent + '</td>' +
+                            '<td>' + (evenement.datedebutEvent ? evenement.datedebutEvent : '') + '</td>' +
+                            '<td>' + (evenement.datefinEvent ? evenement.datefinEvent : '') + '</td>' +
+                            '<td>' + evenement.capaciteEvent + '</td>' +
+                            '<td>' + evenement.imageEvent + '</td>' +
+                            '<td>' + evenement.prixEvent + '</td>' +
+                            '<td>' +
+                                '<a href="{{ path("app_evenement_show", {"id": ' + evenement.idEvent + '}) }}">show</a>' +
+                                '<a href="{{ path("app_evenement_edit", {"idEvent": ' + evenement.idEvent + '}) }}">edit</a>' +
+                            '</td>' +
+                        '</tr>';
+                        resultsTable.append(row);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error: ' + status + ' - ' + error);
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}

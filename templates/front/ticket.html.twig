@@ -1,0 +1,113 @@
+{% extends '/front/base.html.twig' %}
+
+{% block body %}
+
+			<!-- start banner Area -->
+			<section class="banner-area relative" id="home">	
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row d-flex align-items-center justify-content-center">
+						<div class="about-content col-lg-12">
+							<h1 class="text-white">
+								Your Panier
+							</h1>	
+							<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="ticket.html"> Panier</a></p>
+						</div>											
+					</div>
+				</div>
+			</section>
+			<!-- End banner Area -->	
+
+
+			<!-- Start upcoming-exibition Area -->
+			<section class="upcoming-exibition-area section-gap">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							{% if paniers is empty %}
+    <div class="title text-center">
+        <h1 class="mb-10">Your panier is empty</h1>
+    </div>
+{% else %}
+ {% set sum = 0 %}
+  {% set total = 0 %}
+    {% for panier in paniers %}
+      {% set oeuvre = panier.getIdOeuvre() %}
+        {% set sum = sum + panier.quantity %}
+        {% set total = total + oeuvre.getPrix() * panier.getQuantity() %}
+       
+    {% endfor %}
+    <div class="title text-center">
+    <h1 class="mb-10">Welcome To Your Panier ( {{sum}})</h1>
+   
+    <p>You have {{ sum }} items in your panier.</p>
+    <form  action="{{ path('app_all_com', {'qunatity': sum  ,'total':total  } ) }}">
+    <button type="submit" class="btn btn-primary" style="background-color: #8B0000; border-color: #8B0000; color: #fff;"   >
+        validate panier 
+    </button>
+</form>
+
+</div>
+ 
+
+{% endif %}
+
+						</div>
+					</div>						
+					<div class="row">
+						{% for panierItem in paniers %}
+				
+			          {% set oeuvre = panierItem.getIdOeuvre() %}
+                            {% if oeuvre is not null %}
+                              <div class="col-lg-4 col-md-6 single-exhibition">
+                               <div class="thumb">
+                                       <img class="img-fluid"  src="{{ asset(oeuvre.getLienimg()) }}" alt="{{ oeuvre.getTitre() }}">
+                                     </div>
+                                        <p class="date">{{ oeuvre.getDate()|date('Y-m-d ') }}</p>
+                                      <a href="#"><h4> Name Oeuvre : {{ oeuvre.getTitre() }}</h4></a>
+                             <p>
+                                    </p>
+									 <a ><h4>Qantity : {{ panierItem.getQuantity() }} </h4></a>	
+									  <div class="meta-bottom d-flex justify-content-start">
+                          <a ><h4>Price piece:{{ oeuvre.getPrix() }} $</h4></a>	
+                         </div>
+                          <div class="meta-bottom d-flex justify-content-start">
+                          <p class="price">Price Totale:{{ oeuvre.getPrix() * panierItem.getQuantity() }} $</p>
+                         </div>
+				
+		   <p>
+                                    </p>
+		 <form action="{{ path('app_panierdelete', {'idPanier': panierItem.getIdPanier()}) }}" method="POST">
+            <button type="submit" class="btn btn-danger" onclick="deleteOrder()">Delete</button>
+        </form>
+		<p></p>
+
+						  								
+                        </div>
+						{% endif %}
+                     {% endfor %}
+                    </div>
+					 	
+              
+																
+					
+				</div>	
+			</section>
+			<!-- End upcoming-exibition Area -->
+			<script>
+    function checkOrder() {
+        // Display an alert for checking orders
+        alert("Order checked successfully!");
+    }
+
+    function deleteOrder() {
+        // Display an alert for deleting orders
+        alert("Order deleted successfully!");
+    }
+</script>
+	
+			
+
+
+{% endblock  %}
+

@@ -1,0 +1,50 @@
+{% extends '/dashboard/base.html.twig' %}
+
+{% block body %}
+
+        <!-- Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Form Basics</h1>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="./">Home</a></li>
+              <li class="breadcrumb-item">Forms</li>
+              <li class="breadcrumb-item active" aria-current="page">Form Basics</li>
+            </ol>
+          </div>
+
+         
+              <!-- Form Basic -->
+              <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Form Basic</h6>
+                </div>
+                <div class="card-body">
+        {{ form_start(form2, {'action': path('app_panier_create')}) }}
+
+
+<div class="form-group">
+    {{ form_label(form2.id_oeuvre) }}
+    {{ form_widget(form2.id_oeuvre, {'attr': {'class': 'form-control'}}) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form2.id_user) }}
+    {{ form_widget(form2.id_user, {'attr': {'class': 'form-control'}}) }}
+</div>
+ <button type="submit" class="btn btn-primary">Submit</button>
+
+
+
+{{ form_end(form2) }}
+                </div>
+            
+
+          
+
+  
+            
+
+
+
+{% endblock  %}

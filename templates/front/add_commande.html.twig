@@ -1,0 +1,80 @@
+{% extends '/front/base.html.twig' %}
+
+{% block body %}
+
+			<!-- start banner Area -->
+			<section class="banner-area relative" id="home">	
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row d-flex align-items-center justify-content-center">
+						<div class="about-content col-lg-12">
+							<h1 class="text-white">
+								CHeck Order
+							</h1>	
+							<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="ticket.html"> Panier</a></p>
+						</div>											
+					</div>
+				</div>
+			</section>
+			<!-- Form Basic -->
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="m-0">Commande Summary</h4>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted mb-4">Oeuvre Name: {{ oeuvre.getTitre() }}</p>
+                    <p class="text-muted mb-4">Oeuvre Price: {{ oeuvre.getPrix() }}</p>
+                    <p class="text-muted mb-4">Quantity: {{ quantity }}</p>
+                    <p class="text-muted mb-4">Totale Price: {{ oeuvre.getPrix() * quantity }}</p>
+                  
+                        <div class="form-group">
+                            <label for="date" class="text-muted">Date:</label>
+                            <input type="date" id="date" name="date" class="form-control">
+                        </div>
+   
+                        <!-- Add more form fields as needed -->
+                        <form  action="{{ path('app_commande_To_shop', {'idOeuvre': oeuvre.getIdOeuvre(),'quantity': quantity}) }}" method="POST">
+                         <div class="form-group">
+                            <label for="paymentCode" class="text-muted">Payment Code:</label>
+                            <textarea id="paymentCode" name="paymentCode" rows="1" class="form-control"></textarea>
+                              <small id="paymentCodeHelp" class="form-text text-muted" style="display: none; color: red !important;">Payment code must be exactly 8 characters long.</small>                         </div>
+
+                        </div>
+            <button onclick="checkOrder()" type="submit" class="btn btn-primary" style="background-color: #810f12; color: #fff;">Check Orders</button>
+        </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+	<script>
+ 
+     function checkOrder() {
+      var paymentCode = document.getElementById('paymentCode').value.trim();
+      var helpText = document.getElementById('paymentCodeHelp');
+        // Check if payment code is exactly 8 characters long
+        if (paymentCode.length !== 8) {
+              helpText.style.display = 'block';
+             event.preventDefault();
+        }
+        else {
+        // If validation passes, submit the form
+        document.getElementById('paymentForm').submit();
+     
+        }
+    }
+</script>
+
+			
+
+
+{% endblock  %}

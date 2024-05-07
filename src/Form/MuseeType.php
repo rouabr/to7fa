@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File; 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class MuseeType extends AbstractType
 {
@@ -70,7 +71,7 @@ class MuseeType extends AbstractType
             ])
             ->add('image_musee', FileType::class, [
                 'label' => 'Image',
-                'attr' => ['class' => 'form-control'],
+                
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -87,8 +88,12 @@ class MuseeType extends AbstractType
                 ],
                 'attr' => ['class' => 'form-control-file']
             ])
-            ->add('lat')  // Ne pas inclure ces champs dans le formulaire
-            ->add('lon');
+            ->add('lat', HiddenType::class, [
+                'attr' => ['style' => 'display:none;'], // Cachez le champ lat
+            ])
+            ->add('lon', HiddenType::class, [
+                'attr' => ['style' => 'display:none;'], // Cachez le champ lon
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

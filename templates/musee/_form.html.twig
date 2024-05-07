@@ -1,5 +1,7 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
+    <div class="form-group" >
+<a href="{{ path('app_location') }}" class="btn" style="margin-top: 30px;">Choisir la localisation</a>    </div>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
 

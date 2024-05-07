@@ -1,12 +1,75 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gestion Musée{% endblock %}
+{% block title %}Gestion des reservations{% endblock %}
 
 {% block body %}
+<style>
+.search-container {
+    display: flex; /* Afficher les éléments en ligne */
+    align-items: center; /* Aligner les éléments verticalement au centre */
+}
+
+.search-container input[type="text"],
+.search-container select {
+    margin-right: 10px; /* Espacement entre les éléments */
+}
+    #searchInput {
+        padding: 8px;
+        margin-bottom: 10px;
+        width: 70%; /* Increased width */
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 10px; /* Increased border radius */
+        font-size: 16px;
+        background-color: #f8f8f8;
+    }
+
+    #searchInput:focus {
+        outline: none;
+    }
+    .select-container {
+  margin-bottom: 20px;
+}
+
+/* Style pour le label du select menu */
+.select-label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Style pour le select menu */
+.select-menu {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+/* Style pour les options du select menu */
+.select-option {
+  padding: 10px;
+}
+
+/* Style pour les options au survol */
+.select-option:hover {
+  background-color: #f0f0f0;
+}
+
+/* Style pour la flèche du select menu */
+.select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+</style>
 <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a style="background-color: #810f12;" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon">
           <img src="{{ asset('photos/to7fa-removebg-preview.png') }}">
         </div>
@@ -96,7 +159,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="{{ path('app_statistics')}}">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Charts</span>
         </a>
@@ -108,7 +171,7 @@
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <!-- TopBar -->
-        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+        <nav style="background-color: #670c0e;"  class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
           <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
@@ -268,7 +331,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
+                <img class="img-profile rounded-circle" src="{{ asset('back_end/img/boy.png')}}" style="max-width: 60px">
                 <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -295,9 +358,37 @@
         </nav>
         <!-- Topbar -->
  <div class="container" style="margin-left: 250px;">
+      <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Rechercher par nom de musée...">
+                <div class="select-container">
+                  
+                    <select id="museumSelect" name="museumSelect" class="select-menu">
+                        <option value="">Tous les musées</option>
+                        {% for nomMusee, idMusee in choices %}
+                        <option value="{{ idMusee }}">{{ nomMusee }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+        </div>
+ 
+  </div>
+<style> 
+thead {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Ajoute une ombre */
+    border-radius: 10px; /* Augmente le rayon de la bordure */
 
+}
+table {
+    border-collapse: collapse;
+        border: none;
 
-    <table class="table">
+}
+    th, td {
+        padding: 40px; /* Ajoute un espacement autour du contenu des cellules */
+    }
+</style>
+<div class="container" style="margin-left: 250px;">
+ <table style="border-collapse: collapse;"  >
         <thead>
             <tr>
                 <th>Date de réservation</th>
@@ -328,4 +419,40 @@
         </tbody>
     </table>
 </div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    let select = document.getElementById('museumSelect');
+    select.addEventListener('change', function() {
+        let selectedMuseumName = this.options[this.selectedIndex].text;
+        let rows = document.querySelectorAll('table tbody tr'); // Remplacez .table par le sélecteur de votre table
+        
+        rows.forEach(function(row) {
+            let museumName = row.querySelector('td:nth-child(4)').textContent;
+            
+            if (selectedMuseumName === '' || selectedMuseumName === 'Tous les musées' || selectedMuseumName === museumName) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    let input = document.getElementById('searchInput');
+    input.addEventListener('input', function() {
+        let filter = input.value.toUpperCase();
+        let rows = document.querySelectorAll('table tbody tr'); // Remplacez .table par le sélecteur de votre table
+        
+        rows.forEach(function(row) {
+            let museumName = row.querySelector('td:nth-child(4)').textContent.toUpperCase();
+            if (museumName.includes(filter)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
 {% endblock %}

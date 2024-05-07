@@ -1,0 +1,161 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Select Location{% endblock %}
+
+{% block body %}
+    <div id="map" style="height: 400px;"></div>
+    <p>
+            <label for="champ-ville">Ville : </label>
+            <input type="text" id="champ-ville">
+        </p>
+        <p>
+            <label for="champ-distance">Distance : </label>
+            <input type="range" min="1" max="200" id="champ-distance">
+        </p>
+        <p id="valeur-distance"></p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+
+    <script>
+    function ajaxPost(url, data) {
+    return new Promise(function(resolve, reject) {
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    resolve(xhr.responseText);
+                } else {
+                    reject(xhr.statusText);
+                }
+            }
+        };
+        xhr.onerror = function() {
+            reject("Error occurred during the request");
+        };
+        xhr.send(JSON.stringify(data));
+    });
+}
+  let ville = distance = ""
+
+window.onload = () => {
+    // On intialise la carte
+    let carte = L.map('map').setView([36.806389, 10.181667], 13)
+
+    // On charge les "tuiles"
+    L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+        // Il est toujours bien de laisser le lien vers la source des données
+        minZoom: 1,
+        maxZoom: 20,
+        name: 'tiles' // Permettra de ne pas supprimer cette couche
+    }).addTo(carte)
+    carte.on('click', function(event) {
+    let latitude = event.latlng.lat;
+    let longitude = event.latlng.lng;
+    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+    // Redirection vers le contrôleur Symfony app_musee_new avec les coordonnées dans l'URL
+      let previousURL = document.referrer;
+            let newURL = `${previousURL}?latitude=${latitude}&longitude=${longitude}`;
+            
+    window.location.href = newURL;
+        
+});
+    // Gestion des champs
+    let champVille = document.getElementById('champ-ville')
+    let champDistance = document.getElementById('champ-distance')
+    let valeurDistance = document.getElementById('valeur-distance')
+
+    champVille.addEventListener("change", function(){
+        // On envoie le requête ajax vers Nominatim
+        ajaxGet(`https://nominatim.openstreetmap.org/search?q=${this.value}&format=json&addressdetails=1&limit=1&polygon_svg=1`)
+        .then(reponse => {
+            // On convertit la réponse en objet Javascript
+            let data = JSON.parse(reponse)
+
+            // On stocke les coordonnées dans ville
+            ville = [data[0].lat, data[0].lon]
+
+            // On centre la carte sur la ville
+            carte.panTo(ville)
+        })
+    })
+
+    champDistance.addEventListener("change", function(){
+        distance = this.value
+
+        valeurDistance.innerText = distance + " km"
+
+        // On vérifie si on a une ville
+        if(ville != ""){
+            // On envoie la requête
+            ajaxGet(`http://agences-osm.test/chargeAgences.php?lat=${ville[0]}&lon=${ville[1]}&distance=${distance}`)
+            .then(reponse => {
+                // On supprime toutes les couches de la carte
+                carte.eachLayer(function(layer){
+                    if(layer.options.name != 'tiles') carte.removeLayer(layer)
+                })
+
+                //On trace un cercle correspondant à la distance souhaitée
+                let circle = L.circle(ville, {
+                    color: "#839c49",
+                    fillColor: "#839c49",
+                    fillOpacity: 0.3,
+                    radius: distance * 1000
+                }).addTo(carte)
+
+                // On boucle sur les données
+                let donnees = JSON.parse(reponse)
+
+                Object.entries(donnees).forEach(agence => {
+                    // On crée le marqueur
+                    let marker = L.marker([agence[1].lat, agence[1].lon]).addTo(carte)
+                    marker.bindPopup(agence[1].nom)
+                    
+                })
+                // On centre la carte sur le cercle
+                let bounds = circle.getBounds()
+                carte.fitBounds(bounds)
+            })
+        }
+    })
+}
+
+/**
+ * Cette fonction effectue un appel Ajax vers une url et retourne une promesse
+ * @param {string} url 
+ */
+function ajaxGet(url){
+    return new Promise(function(resolve, reject){
+        // Nous allons gérer la promesse
+        let xmlhttp = new XMLHttpRequest()
+
+        xmlhttp.onreadystatechange = function(){
+            if(xmlhttp.readyState == 4){
+                if(xmlhttp.status == 200){
+                    // On "résoud" la promesse
+                    resolve(xmlhttp.response)
+                }else{
+                    reject(xmlhttp)
+                }
+            }
+        }
+
+        xmlhttp.onerror = function(error){
+            reject(error)
+        }
+
+        xmlhttp.open('get', url, true)
+        xmlhttp.send()
+    })
+}
+    </script>
+
+    {# Hidden input fields to store latitude and longitude #}
+    <input type="hidden" id="latitude" name="latitude">
+    <input type="hidden" id="longitude" name="longitude">
+
+    {# Other HTML elements for form submission or additional functionalities #}
+{% endblock %}
+
+

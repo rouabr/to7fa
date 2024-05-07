@@ -203,17 +203,20 @@
 			<!-- End Area -->
            
 <div style="text-align: right;margin-top: 20px;">
-<div class="search-container" style="display: flex; justify-content: center; margin-top: 50px;">
-    <form action="{{ path('app_musee_search') }}" method="POST" style="display: flex; align-items: center;">
-        <fieldset style="margin-right: 10px;">
-            <input type="text" id="keyword" name="keyword" placeholder="Rechercher..." style="width: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 20px;">
-        </fieldset>
-        <button type="submit" class="search-button" style="padding: 10px 20px; border-radius: 20px; background-color: #a52a2a; color: white; border: none;">
-            Rechercher
-        </button>
-    </form>
-</div>
-   
+    <div class="search-container" style="display: inline-block; vertical-align: top;">
+<form action="{{ path('app_musee_search') }}" method="POST" style="display: flex; align-items: center;">
+    <fieldset style="margin-right: 10px;">
+        <input type="text" id="keyword" name="keyword" placeholder="Rechercher..." style="width: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 20px;">
+    </fieldset>
+    <button type="submit" class="search-button" style="padding: 10px 20px; border-radius: 20px; background-color: #a52a2a; color: white; border: none;">
+        Rechercher
+    </button>
+</form>
+    </div>
+    <select id="sort_select" style="display: inline-block; margin-left: 10px; padding: 8px; border: 1px solid #ccc; border-radius: 20px;">
+        <option value="name">A-Z</option>
+        <option value="tickets">Tickets disponibles</option>
+    </select>
 </div>
  
 			<!-- Start gallery Area -->
@@ -301,26 +304,61 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				</div>
 			</footer>	
 			<!-- End footer Area -->		
-<script>
-var sortSelect = document.getElementById('sort_select');
-var museumList = document.querySelector('.museum-list');
-
-// Ajouter un gestionnaire d'événements pour le changement de valeur
-sortSelect.addEventListener('change', function() {
-    // Récupérer la valeur sélectionnée
-    var selectedValue = sortSelect.value;
-
-    // Effectuer une requête AJAX pour récupérer les résultats triés
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '/musees/search?sort=' + selectedValue, true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            // Mettre à jour le contenu de la page avec les résultats triés
-            document.querySelector('.gallery-area').innerHTML = xhr.responseText;
-        }
-    };
-    xhr.send();
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#search_input').on('input', function(){
+        var keyword = $(this).val();
+        $.ajax({
+            url: '{{ path('app_musee_search') }}', // Remplacez 'app_musee_search' par le nom de votre route Symfony pour la recherche
+            method: 'GET',
+            data: { keyword: keyword },
+            success: function(response){
+                // Mettez à jour la liste des musées avec les résultats de la recherche
+                // Assurez-vous d'avoir un moyen approprié d'afficher les résultats dans votre modèle Twig
+                // Par exemple, vous pouvez remplacer le contenu de la liste des musées par les nouveaux résultats
+                $('#museum_list').html(response);
+            },
+            error: function(xhr){
+                console.log('Erreur lors de la recherche : ' + xhr.statusText);
+            }
+        });
+    });
 });
+$(document).ready(function(){
+    // Fonction pour trier les musées par nom
+    function sortByName() {
+        var sortedItems = $('.museum-item').sort(function(a, b) {
+            var nameA = $(a).find('h4').text().toLowerCase();
+            var nameB = $(b).find('h4').text().toLowerCase();
+            return nameA.localeCompare(nameB);
+        });
+        $('.museum-list').html(sortedItems); // Remplacer les éléments triés dans la liste
+    }
+
+    // Fonction pour trier les musées par nombre de tickets disponibles
+    function sortByTickets() {
+        var sortedItems = $('.museum-item').sort(function(a, b) {
+            var ticketsA = parseInt($(a).data('tickets'));
+            var ticketsB = parseInt($(b).data('tickets'));
+            return ticketsB - ticketsA;
+        });
+        $('.museum-list').html(sortedItems); // Remplacer les éléments triés dans la liste
+    }
+
+    // Lorsque l'utilisateur change l'option de tri
+    $('#sort_select').on('change', function() {
+        var sortBy = $(this).val(); // Récupérer la valeur sélectionnée
+        if (sortBy === 'name') {
+            sortByName(); // Trier les musées par nom
+        } else if (sortBy === 'tickets') {
+            sortByTickets(); // Trier les musées par nombre de tickets disponibles
+        }
+    });
+});
+
+</script>
+
 </script>
 			<script src="js/vendor/jquery-2.2.4.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

@@ -1,11 +1,7 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Musées!{% endblock %}</title>
-		<link rel="icon" type="image/png" href="{{ asset('/photos/to7fa-removebg-preview.png') }}">		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-o2FWgrFXkGzeQrjtJgAMjPO7z5FJmP1PQtXtlx0bTVazlMLf1FQwliSxLtkhC8xlCkdy9ag+YHdntqC6V/ebUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-o2FWgrFXkGzeQrjtJgAMjPO7z5FJmP1PQtXtlx0bTVazlMLf1FQwliSxLtkhC8xlCkdy9ag+YHdntqC6V/ebUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+{% extends 'basefront.html.twig' %}
+
 {% block stylesheets %}
+<link rel="stylesheet" href="path/to/weather-icons.min.css">
 <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-o2FWgrFXkGzeQrjtJgAMjPO7z5FJmP1PQtXtlx0bTVazlMLf1FQwliSxLtkhC8xlCkdy9ag+YHdntqC6V/ebUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link href="{{ asset('assets/css/linearicons.css') }}" rel="stylesheet">
@@ -17,6 +13,9 @@
 <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 <style>
 /* Your additional CSS styles here */
+.museum-title {
+    margin-left: 220px; /* Ajouter une marge à gauche */
+}
 .btn-custom {
     background-color: #8B4513; /* Couleur marron */
     color: #fff; /* Texte en blanc */
@@ -45,11 +44,14 @@
     background-color: rgba(0, 0, 0, 0.5); /* Noir transparent */
     opacity: 0;
     transition: opacity 0.3s ease;
+        border-radius: 90px; /* Ajoutez des coins arrondis */
+
 }
 
 .image-container:hover .image-overlay {
     opacity: 1; /* Affiche l'obscurcissement au survol */
     cursor: pointer; /* Curseur pointer au survol */
+    
 }
 
 .zoom-icon {
@@ -71,9 +73,9 @@
 
       
          
-    </head>
+    
 {% block body %}
-   
+
           <header id="header" id="home">
 			  	<div class="container header-top">
 			  		<div class="row">
@@ -112,7 +114,7 @@
                     <li><a href="ticket.html">Ticket</a></li>
                     <li><a href="blog-home.html">Blog</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li class="menu-has-children"><a href="">Pages</a>
+                    <li ><a href="">Pages</a>
                         <ul>
                             <li><a href="blog-single.html">Blog Single</a></li>
                             <li><a href="category.html">Category</a></li>
@@ -143,25 +145,26 @@
 				</div>
 			</section>
 
-<section class="gallery-area section-gap gallery-page-area align-items-center">
- <div class="container">
+<section class="gallery-area section-gap gallery-page-area align-items-center"  >
+        <div class="mb-3 museum-title">
+    <h1>Musée de {{ musee.nomMusee }}</h1>
+</div>
+ <div class="container" >
+                 <div id="map" style="height: 400px;"></div>
+<div id="weather"></div>
     <div class="row">
+
         <div class="col-md-6">
+
+        
             <div class="mb-3">
+                <strong>Adresse 📍</strong>
+                <p>{{ musee.adresse }} , {{ musee.ville }}</p>
+            </div>
+           
+            <div class="mb-3">
+                <strong>{{ musee.nbrTicketsDisponibles}} tickets disponibles!</strong>
                 
-                <p>Musée de {{ musee.nomMusee }}</p>
-            </div>
-            <div class="mb-3">
-                <strong>Adresse:</strong>
-                <p>{{ musee.adresse }}</p>
-            </div>
-            <div class="mb-3">
-                <strong>Ville:</strong>
-                <p>{{ musee.ville }}</p>
-            </div>
-            <div class="mb-3">
-                <strong>Les tickets disponibles:</strong>
-                <p>{{ musee.nbrTicketsDisponibles}}</p>
             </div>
             <div class="mb-3">
                 <strong>Description</strong>
@@ -174,8 +177,7 @@
             <hr style="background-color: white;">
             <hr style="background-color: white;">
             <hr style="background-color: white;">
-            <hr style="background-color: white;">
-            <hr style="background-color: white;">
+          
 
          
                         <a href="/reservation/musee/new/{{ musee.getIdMusee() }}"><button class="btn btn-custom">Reserver</button></a>
@@ -255,7 +257,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         <script src="{{ asset('assets/js/vendor/jquery-2.2.4.min.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="{{ asset('assets/js/vendor/bootstrap.min.js') }}"></script>           
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
         <script src="{{ asset('assets/js/easing.min.js') }}"></script>            
         <script src="{{ asset('assets/js/hoverIntent.js') }}"></script>
         <script src="{{ asset('assets/js/superfish.min.js') }}"></script>   
@@ -269,5 +270,56 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         <script src="{{ asset('assets/js/parallax.min.js') }}"></script>       
         <script src="{{ asset('assets/js/mail-script.js') }}"></script>    
         <script src="{{ asset('assets/js/main.js') }}"></script> 
-      
+          <!-- Script JavaScript pour afficher la carte et le marqueur -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <script>
+        // Utilisez les valeurs de longitude et de latitude pour initialiser la carte
+        let museeLat = {{ musee.lat }};
+        let museeLon = {{ musee.lon }};
+
+        // Initialisez la carte avec la localisation du musée
+        let carte = L.map('map').setView([museeLat, museeLon], 13);
+
+        // Ajoutez une couche de tuiles
+        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+            minZoom: 1,
+            maxZoom: 20,
+            name: 'tiles'
+        }).addTo(carte);
+
+        // Ajoutez un marqueur à la localisation du musée
+        L.marker([museeLat, museeLon]).addTo(carte);
+    </script>
+          <script>
+                      const museeVille = "{{ musee.ville }}";
+
+        // Fonction pour obtenir les données météorologiques
+        function getWeather(city) {
+
+            const apiKey = '558bd4cc3eb4c4b848588c909473f778';
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+               fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const temperature = data.main.temp;
+            const description = data.weather[0].description;
+            const iconCode = data.weather[0].icon; // Obtenez le code d'icône de la réponse
+            const weatherElement = document.getElementById('weather');
+            weatherElement.innerHTML = `Temperature: ${temperature}°C, Description: ${description}`;
+
+            // Ajoutez une icône météorologique en fonction du code d'icône
+            const iconElement = document.createElement('i');
+            iconElement.className = `wi wi-owm-${iconCode}`;
+            weatherElement.appendChild(iconElement);
+        })
+        .catch(error => {
+            console.error('Error fetching weather data:', error);
+        });
+        }
+
+        // Appeler la fonction pour afficher la météo dans une ville spécifique (par exemple, Paris)
+        getWeather(museeVille);
+    </script>
         {% endblock %}

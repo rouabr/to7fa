@@ -3,11 +3,29 @@
 
 
 
+
+
 {% block body %}
+<style>
+    #searchInput {
+        padding: 8px;
+        margin-bottom: 10px;
+        width: 95%; /* Increased width */
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 10px; /* Increased border radius */
+        font-size: 16px;
+        background-color: #f8f8f8;
+    }
+
+    #searchInput:focus {
+        outline: none;
+    }
+</style>
 <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a style="background-color: #810f12;" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon">
           <img src="{{ asset('photos/to7fa-removebg-preview.png') }}">
         </div>
@@ -96,7 +114,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="{{ path('app_statistics')}}">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Charts</span>
         </a>
@@ -108,7 +126,7 @@
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <!-- TopBar -->
-        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+        <nav style="background-color: #670c0e;" class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top ">
           <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
@@ -268,7 +286,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
+                <img class="img-profile rounded-circle" src="{{ asset('back_end/img/boy.png')}}" style="max-width: 60px">
                 <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -294,16 +312,31 @@
           </ul>
         </nav>
         <!-- Topbar -->
+        <style> 
+thead {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Ajoute une ombre */
+    border-radius: 10px; /* Augmente le rayon de la bordure */
+
+}
+table {
+    border-collapse: collapse;
+        border: none;
+
+}
+    th, td {
+        padding: 40px; /* Ajoute un espacement autour du contenu des cellules */
+    }
+</style>
  <div class="container" style="margin-left: 250px;"> 
-    <h1>Liste des musées</h1>
-    <table class="table">
+ <input type="text" id="searchInput" placeholder="Rechercher par nom et ville..." style="border-radius: 10px;width: 40%;border: none;">
+    <table >
         <thead>
             <tr>
                
                 <th>Nom</th>
                 <th>Adresse</th>
                 <th>Ville</th>
-                <th>Nombre de tickets</th>
+                <th>Tickets</th>
                 <th>Description</th>
                 <th>Image</th>
                 <th>Actions</th>
@@ -337,6 +370,25 @@
     <a href="{{ path('app_musee_new') }}">Créer un nouveau musée</a>
   </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let input = document.getElementById('searchInput'); // Get the input field element
+        input.addEventListener('input', function() {
+            let filter = input.value.toUpperCase(); // Convert the input value to uppercase for case-insensitive comparison
+            let rows = document.querySelectorAll('table tbody tr'); // Select all table rows in the tbody
+            rows.forEach(function(row) {
+                let museumName = row.querySelector('td:nth-child(1)').textContent.toUpperCase(); // Get museum name
+                let museumCity = row.querySelector('td:nth-child(3)').textContent.toUpperCase(); // Get museum city
+                // Check if museum name or city includes the search filter
+                if (museumName.includes(filter) || museumCity.includes(filter)) {
+                    row.style.display = ''; // If yes, display the row
+                } else {
+                    row.style.display = 'none'; // If not, hide the row
+                }
+            });
+        });
+    });
+</script>
 
 {% endblock %}
 

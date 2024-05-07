@@ -1,10 +1,13 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Musées!{% endblock %}</title>
-		<link rel="icon" type="image/png" href="{{ asset('/photos/to7fa-removebg-preview.png') }}">		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-o2FWgrFXkGzeQrjtJgAMjPO7z5FJmP1PQtXtlx0bTVazlMLf1FQwliSxLtkhC8xlCkdy9ag+YHdntqC6V/ebUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-o2FWgrFXkGzeQrjtJgAMjPO7z5FJmP1PQtXtlx0bTVazlMLf1FQwliSxLtkhC8xlCkdy9ag+YHdntqC6V/ebUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+  <meta charset="utf-8" />
+  		<link rel="icon" type="image/png" href="{{ asset('/photos/to7fa-removebg-preview.png') }}">		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-o2FWgrFXkGzeQrjtJgAMjPO7z5FJmP1PQtXtlx0bTVazlMLf1FQwliSxLtkhC8xlCkdy9ag+YHdntqC6V/ebUg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <title>To7fa</title>
+  </head>
 {% block stylesheets %}
 <link href="{{ asset('assets/css/linearicons.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
@@ -57,10 +60,9 @@
 
            
          
-    </head>
 {% block body %}
-   
-      
+
+
 
             
 {% endblock %}

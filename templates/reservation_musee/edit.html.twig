@@ -6,7 +6,7 @@
 <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a style="background-color: #810f12;" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon">
           <img src="{{ asset('photos/to7fa-removebg-preview.png') }}">
         </div>
@@ -96,7 +96,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="{{ path('app_statistics')}}">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Charts</span>
         </a>
@@ -108,7 +108,7 @@
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <!-- TopBar -->
-        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+        <nav style="background-color: #670c0e;" class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
           <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
@@ -268,7 +268,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
+                <img class="img-profile rounded-circle" src="{{ asset('back_end/img/boy.png')}}" style="max-width: 60px">
                 <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -295,11 +295,10 @@
         </nav>
         <!-- Topbar -->
  <div class="container" style="margin-left: 250px;">
-    <h1>Edit ReservationMusee</h1>
+    <h1>Modifier réservation</h1>
 
     {{ include('reservation_musee/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('app_reservation_musee_index') }}">back to list</a>
 
-    {{ include('reservation_musee/_delete_form.html.twig') }}
 {% endblock %}

@@ -1,4 +1,53 @@
-<form method="post" action="{{ path('app_musee_delete', {'idMusee': musee.idMusee}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+
+<form id="deleteForm" method="post" action="{{ path('app_musee_delete', {'idMusee': musee.idMusee}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ musee.idMusee) }}">
     <button class="btn">Supprimer</button>
 </form>
+
+{% block javascripts %}
+ <script src="https://cdn.jsdelivr.net/npm/notyf@3.0.0/notyf.min.js"></script>
+    <script>
+        // Initialize Notyf
+        const notyf = new Notyf();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select the delete form
+            const deleteForm = document.querySelector('#deleteForm');
+
+            // Add event listener for form submission
+            deleteForm.addEventListener('submit', function(event) {
+                // Prevent the default form submission behavior
+                event.preventDefault();
+
+                // Confirm deletion with user
+                const confirmed = confirm('Are you sure you want to delete this item?');
+
+                // If user confirms, submit the form
+                if (confirmed) {
+                    // Submit the form
+                    fetch(deleteForm.getAttribute('action'), {
+                        method: 'POST',
+                        body: new FormData(deleteForm)
+                    })
+                    .then(response => {
+                        // Check if the request was successful
+                        if (response.ok) {
+                            // Show success notification
+                            notyf.success('Item deleted successfully.');
+                            // Optionally, redirect to another page
+                            window.location.href = '{{ path('app_musee_index') }}';
+                        } else {
+                            // Show error notification
+                            notyf.error('Failed to delete item.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Show error notification
+                        notyf.error('An unexpected error occurred.');
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}

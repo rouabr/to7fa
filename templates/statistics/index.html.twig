@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Musee{% endblock %}
+{% block title %}Statistiques des Réservations{% endblock %}
 
 {% block body %}
 <div id="wrapper">
     <!-- Sidebar -->
     <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-      <a style="background-color: #810f12;"  class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a style="background-color: #810f12;" class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon">
           <img src="{{ asset('photos/to7fa-removebg-preview.png') }}">
         </div>
@@ -90,7 +90,8 @@
             <a class="collapse-item" href="login.html">Login</a>
             <a class="collapse-item" href="register.html">Register</a>
             <a class="collapse-item" href="{{ path('app_reservation_musee_index')}}">Gestion des reservations</a>
-            <a class="collapse-item active" href="{{ path('app_musee_index')}}">Gestion des musées</a>
+            <a class="collapse-item" href="{{ path('app_musee_index')}}">Gestion des musées</a>
+
           </div>
         </div>
       </li>
@@ -107,7 +108,7 @@
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
         <!-- TopBar -->
-        <nav style="background-color: #670c0e;" class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+        <nav style="background-color: #670c0e;"  class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
           <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
@@ -293,292 +294,54 @@
           </ul>
         </nav>
         <!-- Topbar -->
- <div class="container" style="margin-left: 250px;"> <!-- Ajoutez une marge de 250px à gauche pour éviter le chevauchement avec la barre latérale -->
-    <h1>Musee</h1>
-    <div id="map" style="height: 400px;"></div>
-    <table class="table">
-        <tbody>
-           
-            <tr>
-                <th>Nom du musée</th>
-                <td>{{ musee.nomMusee }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ musee.adresse }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ musee.ville }}</td>
-            </tr>
-            <tr>
-                <th>Le nombre de tickets disponibles</th>
-                <td>{{ musee.nbrTicketsDisponibles }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ musee.description }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                 <td> <img src="{{ asset(musee.imageMusee) }}" width='30%' /> </td>
-            </tr>
-        </tbody>
-    </table>
-      <a href="{{ path('musee_generate_pdf', {id: musee.idMusee}) }}" class="btn btn-primary">Liste des réservations</a>
+ <div class="container" style="margin-left: 250px;">
+    <h2>Statistiques des Réservations</h2>
+    <canvas id="reservationChart" width="400" height="200"></canvas>
 
-               
-   
-    
-</div>
-    {{ include('musee/_delete_form.html.twig') }}
-      <!-- Script JavaScript pour afficher la carte et le marqueur -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
-
-
-<!-- Inclure Bootstrap JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Utilisez les valeurs de longitude et de latitude pour initialiser la carte
-        let museeLat = {{ musee.lat }};
-        let museeLon = {{ musee.lon }};
+        // Récupérer les données des réservations
+        var reservationsThisYear = {{ reservations_this_year }};
+        var reservationsLastYear = {{ reservations_last_year }};
 
-        // Initialisez la carte avec la localisation du musée
-        let carte = L.map('map').setView([museeLat, museeLon], 13);
+        // Calculer le pourcentage de croissance
+        var growthPercentage = ((reservationsThisYear - reservationsLastYear) / reservationsLastYear) * 100;
 
-        // Ajoutez une couche de tuiles
-        L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
-            minZoom: 1,
-            maxZoom: 20,
-            name: 'tiles'
-        }).addTo(carte);
-
-        // Ajoutez un marqueur à la localisation du musée
-        L.marker([museeLat, museeLon]).addTo(carte);
-    </script>
-
-
-
-{% endblock %}
-{% block stylesheets %}
-    {{ parent() }}
-    <!-- Include FullCalendar core CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css">
-    <!-- Include FullCalendar dayGrid plugin CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/daygrid/main.min.css">
-    <!-- Include FullCalendar timeGrid plugin CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/timegrid/main.min.css">
-   <style> #calendar, table {
-  margin-left:auto;
-  margin-right:auto;
-  text-align:center;
-  width:80%;
-}
-th {
-  border-style:solid;
-  border-width:1px;
-  margin:10px;
-  padding:10px;
-}
-.day {
-  border-style:solid;
-  border-width:1px;
-  margin:10px;
-  padding:10px;  
-}
-.today {
-  background-color:palegreen;
-}
-.weekend {
-  color:gray;
-} </style>
-{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
-
-    <!-- Include FullCalendar library script -->
-  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar-holder');
-            
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                // Calendar configuration options...
-                // Your existing calendar configuration here...
-                eventRender: function(info) {
-                    // Fetch reservation data for the current date using AJAX
-                    var date = info.event.startStr; // Get the start date of the event
-                    fetchReservationsForDate(date)
-                        .then(function(reservations) {
-                            // Update the event title to include the number of reservations
-                            info.el.querySelector('.fc-title').textContent = reservations.length + ' reservations';
-                        });
-                }
-            });
-
-            calendar.render();
-
-            function fetchReservationsForDate(date) {
-                return fetch('{{ path('fc_load_events') }}', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        date: date
-                    })
-                })
-                .then(function(response) {
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch reservations');
+        // Créer un graphique en barres
+        var ctx = document.getElementById('reservationChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Cette année', 'Année précédente'],
+                datasets: [{
+                    label: 'Nombre de réservations',
+                    data: [reservationsThisYear, reservationsLastYear],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Croissance des réservations : ' + growthPercentage.toFixed(2) + '%'
                     }
-                    return response.json();
-                })
-                .catch(function(error) {
-                    console.error('Error fetching reservations:', error);
-                    return [];
-                });
+                }
             }
         });
-        function generate_year_range(start, end) {
-    var years = "";
-    for (var year = start; year <= end; year++) {
-        years += "<option value='" + year + "'>" + year + "</option>";
-    }
-    return years;
-}
-
-today = new Date();
-currentMonth = today.getMonth();
-currentYear = today.getFullYear();
-selectYear = document.getElementById("year");
-selectMonth = document.getElementById("month");
-
-
-createYear = generate_year_range(1970, 2050);
-/** or
- * createYear = generate_year_range( 1970, currentYear );
- */
-
-document.getElementById("year").innerHTML = createYear;
-
-var calendar = document.getElementById("calendar");
-var lang = calendar.getAttribute('data-lang');
-
-var months = "";
-var days = "";
-
-var monthDefault = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-var dayDefault = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-if (lang == "en") {
-    months = monthDefault;
-    days = dayDefault;
-} else if (lang == "id") {
-    months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-    days = ["Ming", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
-} else if (lang == "fr") {
-    months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
-    days = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
-} else {
-    months = monthDefault;
-    days = dayDefault;
-}
-
-
-var $dataHead = "<tr>";
-for (dhead in days) {
-    $dataHead += "<th data-days='" + days[dhead] + "'>" + days[dhead] + "</th>";
-}
-$dataHead += "</tr>";
-
-//alert($dataHead);
-document.getElementById("thead-month").innerHTML = $dataHead;
-
-
-monthAndYear = document.getElementById("monthAndYear");
-showCalendar(currentMonth, currentYear);
-
-
-
-function next() {
-    currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
-    currentMonth = (currentMonth + 1) % 12;
-    showCalendar(currentMonth, currentYear);
-}
-
-function previous() {
-    currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
-    currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
-    showCalendar(currentMonth, currentYear);
-}
-
-function jump() {
-    currentYear = parseInt(selectYear.value);
-    currentMonth = parseInt(selectMonth.value);
-    showCalendar(currentMonth, currentYear);
-}
-
-function showCalendar(month, year) {
-
-    var firstDay = ( new Date( year, month ) ).getDay();
-
-    tbl = document.getElementById("calendar-body");
-
-    
-    tbl.innerHTML = "";
-
-    
-    monthAndYear.innerHTML = months[month] + " " + year;
-    selectYear.value = year;
-    selectMonth.value = month;
-
-    // creating all cells
-    var date = 1;
-    for ( var i = 0; i < 6; i++ ) {
-        
-        var row = document.createElement("tr");
-
-        
-        for ( var j = 0; j < 7; j++ ) {
-            if ( i === 0 && j < firstDay ) {
-                cell = document.createElement( "td" );
-                cellText = document.createTextNode("");
-                cell.appendChild(cellText);
-                row.appendChild(cell);
-            } else if (date > daysInMonth(month, year)) {
-                break;
-            } else {
-                cell = document.createElement("td");
-                cell.setAttribute("data-date", date);
-                cell.setAttribute("data-month", month + 1);
-                cell.setAttribute("data-year", year);
-                cell.setAttribute("data-month_name", months[month]);
-                cell.className = "date-picker";
-                cell.innerHTML = "<span>" + date + "</span>";
-
-                if ( date === today.getDate() && year === today.getFullYear() && month === today.getMonth() ) {
-                    cell.className = "date-picker selected";
-                }
-                row.appendChild(cell);
-                date++;
-            }
-
-
-        }
-
-        tbl.appendChild(row);
-    }
-
-}
-
-function daysInMonth(iMonth, iYear) {
-    return 32 - new Date(iYear, iMonth, 32).getDate();
-}
     </script>
 {% endblock %}

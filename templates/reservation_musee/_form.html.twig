@@ -1,9 +1,23 @@
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'id': 'reservation-form'}}) }}
     {{ form_widget(form) }}
-         <hr style="background-color: white;">
-            <hr style="background-color: white;">
-            <hr style="background-color: white;">
-         
-    <button class="btn">{{ button_label|default('Reserver') }}</button>
+    <hr style="background-color: white;">
+    <div class="h-captcha" data-sitekey="428e2d17-796c-4467-b6bb-40f170596d84" 
+         data-callback="onHcaptchaSubmit"></div>
+    <button class="btn" id="submit-btn" disabled>{{ button_label|default('Reserver') }}</button>
 {{ form_end(form) }}
-<script src="{{ asset('js/custom.js') }}"></script>
+
+<script>
+    function onHcaptchaSubmit(token) {
+        // Enable the submit button when captcha is resolved
+        document.getElementById('submit-btn').removeAttribute('disabled');
+    }
+
+    document.getElementById('reservation-form').addEventListener('submit', function(event) {
+        // Prevent the default form submission if captcha is not resolved
+        if (!document.querySelector('.h-captcha-response').value) {
+            event.preventDefault();
+            alert('Veuillez vérifier que vous n\'êtes pas un robot.');
+        }
+    });
+</script>
+
